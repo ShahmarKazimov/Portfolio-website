@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-ink: #f4f3ee;
+  --color-ink-dim: #b8b6ae;
+  --color-ink-faint: #7c7a72;
+  --color-ground: #0a0a0b;
+  --color-ground-raised: #121214;
+  --color-ground-elevated: #18181b;
+  --color-line: #26262a;
+  --color-accent: #c9ff3a;
+  --color-accent-dim: #8fb82a;
+  --color-signal: #7c8cff;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-ground);
+}
+
+body {
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #0a0a0b;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ground);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-faint);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-outline {
+  -webkit-text-stroke: 1.5px var(--color-ink-dim);
+  color: transparent;
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.grid-lines {
+  background-image:
+    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-pulse {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+@keyframes scan-line-move {
+  0% {
+    top: 4%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    top: 94%;
+    opacity: 0;
+  }
+}
+
+.orbit-spin {
+  animation: orbit-spin 14s linear infinite;
+}
+
+.orbit-pulse {
+  animation: orbit-pulse 4.5s ease-in-out infinite;
+}
+
+.scan-line {
+  animation: scan-line-move 3.6s ease-in-out infinite;
+}
+
+/* Ambient background gradient mesh — a few large blurred color blobs
+   drifting slowly. GPU-cheap: transform-only, few nodes, masked so it's
+   strongest behind hero/about and fades out toward the rest of the page. */
+.gradient-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
+}
+
+.gradient-mesh > span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.16;
+  will-change: transform;
+}
+
+.gradient-mesh > span:nth-child(1) {
+  top: -10%;
+  left: 8%;
+  width: 46vw;
+  height: 46vw;
+  background: var(--color-signal);
+  opacity: 0.1;
+  animation: mesh-drift-a 34s ease-in-out infinite;
+}
+
+.gradient-mesh > span:nth-child(2) {
+  top: 20%;
+  right: -8%;
+  width: 40vw;
+  height: 40vw;
+  background: var(--color-signal);
+  animation: mesh-drift-b 40s ease-in-out infinite;
+}
+
+.gradient-mesh > span:nth-child(3) {
+  top: 55%;
+  left: 30%;
+  width: 34vw;
+  height: 34vw;
+  background: var(--color-accent);
+  opacity: 0.05;
+  animation: mesh-drift-c 46s ease-in-out infinite;
+}
+
+@keyframes mesh-drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(6vw, 8vh) scale(1.12); }
+}
+
+@keyframes mesh-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-7vw, 6vh) scale(0.92); }
+}
+
+@keyframes mesh-drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(4vw, -6vh) scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .gradient-mesh > span {
+    animation-duration: 180s !important;
+  }
+}
+
+/* Idle floating bob for capability cards — staggered via inline delay. */
+@keyframes card-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+.card-float {
+  animation: card-float 5.5s ease-in-out infinite;
+}
+.card-float-0 { animation-delay: 0s; }
+.card-float-1 { animation-delay: 0.6s; }
+.card-float-2 { animation-delay: 1.2s; }
+.card-float-3 { animation-delay: 1.8s; }
