@@ -67,8 +67,8 @@ export const WordsPullUpMultiStyle = ({ segments, className = "", style }) => {
 
 export const PrismaHero = () => {
   return (
-    <section className="h-screen w-full">
-      <div className="relative h-full w-full overflow-hidden rounded-2xl bg-black md:rounded-[2rem]">
+    <section className="min-h-[100svh] w-full lg:h-screen">
+      <div className="relative min-h-[100svh] w-full overflow-hidden rounded-2xl bg-black md:rounded-[2rem] lg:h-full lg:min-h-0">
         {/* Background video */}
         <video
           autoPlay
@@ -76,7 +76,7 @@ export const PrismaHero = () => {
           muted
           playsInline
           preload="auto"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute bottom-20 sm:bottom-15 h-full w-full object-cover"
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4"
         />
 
@@ -88,19 +88,22 @@ export const PrismaHero = () => {
 
 
         {/* Hero content */}
-        <div className="absolute max-w-7xl mx-auto bottom-8 left-0 right-0 px-8">
+        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-4 pb-6 sm:px-6 sm:pb-8 md:px-8">
           <div className="grid grid-cols-12 items-end gap-4">
             <div className="col-span-12 lg:col-span-8">
               <h1
-                className="font-medium leading-[0.8] tracking-[-0.06em] text-[14vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[7vw]"
+                className="font-medium leading-[0.8] tracking-[-0.04em] text-[15vw] sm:text-[13vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[7vw]"
                 style={{ color: "#E1E0CC" }}
               >
-                <WordsPullUp text="Shahmar "showAsterisk />
-                <WordsPullUp className="text-accent ml-50 text-[14vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[6vw]" text="Kazimov" />
+                <WordsPullUp text="Shahmar " showAsterisk />
+                <WordsPullUp
+                  className="text-accent ml-0 sm:ml-6 md:ml-10 lg:ml-16 xl:ml-50 text-[13vw] sm:text-[13vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[6vw]"
+                  text="Kazimov"
+                />
               </h1>
             </div>
 
-            <div className="col-span-12 flex flex-col gap-5 pb-1 lg:col-span-4">
+            <div className="col-span-12 flex flex-col gap-4 pb-1 sm:gap-5 lg:col-span-4">
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
