@@ -76,7 +76,7 @@ export const PrismaHero = () => {
           muted
           playsInline
           preload="auto"
-          className="absolute bottom-20 sm:bottom-15 h-full w-full object-cover"
+          className="absolute bottom-24 sm:bottom-0 h-full w-full object-cover"
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4"
         />
 
@@ -88,7 +88,7 @@ export const PrismaHero = () => {
 
 
         {/* Hero content */}
-        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-4 pb-6 sm:px-6 sm:pb-8 md:px-8">
+        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-4 sm:px-0 pb-6 sm:pb-8">
           <div className="grid grid-cols-12 items-end gap-4">
             <div className="col-span-12 lg:col-span-8">
               <h1

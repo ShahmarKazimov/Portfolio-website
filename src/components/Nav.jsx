@@ -19,14 +19,14 @@ export default function Nav() {
       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-500 ${scrolled ? "bg-black backdrop-blur-md border-line" : "bg-transparent"
         }`}
     >
-      <nav className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-0 lg:py-6">
-        <div className="px-4 py-3 lg:rounded-b-2xl lg:rounded-t-none lg:absolute lg:top-0">
+      <nav className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-2 sm:px-6 lg:px-0 lg:py-8">
+        <div className="py-3 lg:rounded-b-2xl lg:rounded-t-none lg:absolute lg:top-2">
           <a href="/" className="font-display text-sm">
             <img src={logoMain} alt="Logo" className="h-6 w-7" />
           </a>
         </div>
 
-        <ul className="pointer-events-auto absolute left-1/2 top-0 hidden -translate-x-1/2 items-center gap-6 px-8 py-3 lg:flex xl:gap-10 xl:px-10">
+        <ul className="pointer-events-auto absolute left-1/2 top-2 hidden -translate-x-1/2 items-center gap-6 px-8 py-3 lg:flex xl:gap-10 xl:px-10">
           {nav.map((item) => (
             <li key={item.href}>
               <a
@@ -42,7 +42,7 @@ export default function Nav() {
           ))}
         </ul>
 
-        <div className="hidden items-center gap-1 px-4 font-mono text-xs uppercase tracking-widest lg:absolute lg:top-0 py-3 lg:right-0 lg:flex">
+        <div className="hidden items-center gap-1 font-mono text-xs uppercase tracking-widest lg:absolute lg:top-2 py-3 lg:right-0 lg:flex">
           <button
             type="button"
             onClick={() => setLang("en")}
@@ -66,7 +66,7 @@ export default function Nav() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-full text-ink lg:hidden"
+          className="flex h-10 w-10 items-center pr-[2px] justify-end rounded-full text-ink lg:hidden"
         >
           <span className="relative block h-4 w-4">
             <span
