@@ -15,8 +15,10 @@ export const profile = {
   phone: "+994 50 427 19 87",
   linkedin: "https://linkedin.com/in/shahmar-kazimov",
   github: "https://github.com/ShahmarKazimov",
+  instagram: "https://instagram.com/shahmar_kazimov",
   resumeUrl: "https://drive.google.com/file/d/1m9yjcf9bFw_AhzjdpRwmTM-mAHzJfZHb/view?usp=sharing",
   bio: "AI Instructor and Software Developer with 3+ years of experience in software development, specializing in React and Next.js. Experienced in building high-performance web applications, integrating REST APIs, and delivering practical Artificial Intelligence training. Focused on Generative AI, prompt engineering, AI tools, and practical AI applications. Combines a strong technical background with hands-on teaching experience to make AI technologies accessible and applicable to real-world use cases.",
+  profilePictureUrl: "/images/profile.png",
 }
 
 export const languages = [

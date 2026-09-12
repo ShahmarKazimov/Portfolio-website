@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
 import { profile } from "../data/content";
-import MagneticElement from "./ui/MagneticElement";
+import FancyTextHover from "./ui/FancyTextHover";
+import { InteractiveTravelCard } from "./ui/InteractiveTravelCard";
+import profilePictureUrl from "../assets/profile-picture.png";
 
 export default function Contact() {
   return (
     <section id="contact" className="relative overflow-hidden px-6 py-28 md:px-10">
-      <div className="absolute inset-0 grid-lines opacity-[0.25]" />
+      <div className="absolute inset-0" />
       <div
-        className="pointer-events-none absolute bottom-[-20%] left-[-10%] h-[420px] w-[420px] rounded-full opacity-20 blur-[120px]"
+        className="pointer-events-none absolute bottom-[-20%] left-[-10%] h-105 w-105 rounded-full opacity-20 blur-[120px]"
         style={{ background: "radial-gradient(circle, var(--color-signal), transparent 70%)" }}
       />
 
@@ -26,9 +28,9 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7 }}
-          className="max-w-3xl font-display text-5xl font-medium leading-[1.05] tracking-tight text-ink sm:text-6xl md:text-7xl"
+          className="max-w-3xl font-display text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-5xl"
         >
-          Let's build or teach<br />something worthwhile.
+          Let's build something worthwhile.
         </motion.h2>
 
         <motion.div
@@ -36,30 +38,19 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="mt-12 flex flex-col gap-8 border-t border-line pt-10 sm:flex-row sm:items-end sm:justify-between"
+          className="mt-12 flex flex-col gap-8 border-t border-line pt-10 lg:flex-row lg:items-center lg:justify-between"
         >
-          <MagneticElement
-            as={motion.a}
-            href={`mailto:${profile.email}`}
-            strength={0.3}
-            className="group inline-flex items-center gap-3 font-display text-2xl font-medium text-ink transition-colors hover:text-accent sm:text-3xl"
-          >
-            {profile.email}
-            <span className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
-              ↗
-            </span>
-          </MagneticElement>
+          <InteractiveTravelCard
+            title="Shahmar Kazimov"
+            imageUrl={profilePictureUrl}
+          />
 
-          <div className="flex flex-col gap-4 font-mono text-sm text-ink-dim sm:items-end">
-            <span>{profile.phone}</span>
-            <span>{profile.location}</span>
-            <div className="flex gap-4">
-              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
-                LinkedIn
-              </a>
-              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
-                GitHub
-              </a>
+          <div className="flex flex-col gap-6 font-mono text-sm text-ink-dim lg:items-end">
+            <FancyTextHover className="justify-start lg:justify-end gap-6 sm:gap-10" />
+
+            <div className="flex items-center gap-2 text-xs text-ink-faint">
+              <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>{profile.location}</span>
             </div>
           </div>
         </motion.div>

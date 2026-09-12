@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
+import video2 from "../../assets/4.mp4";
 import { profile } from "../../data/content";
 
 /* ---------------- WordsPullUp ---------------- */
@@ -24,7 +25,7 @@ export const WordsPullUp = ({ text, className = "", showAsterisk = false, style 
           >
             {word}
             {showAsterisk && isLast && (
-              <span className="absolute top-[0.3em] -right-[0em] text-[0.31em]">*</span>
+              <span className="absolute top-[0.3em] right-0 text-[0.31em]">*</span>
             )}
           </motion.span>
         );
@@ -67,8 +68,8 @@ export const WordsPullUpMultiStyle = ({ segments, className = "", style }) => {
 
 export const PrismaHero = () => {
   return (
-    <section className="min-h-[100svh] w-full lg:h-screen">
-      <div className="relative min-h-[100svh] w-full overflow-hidden rounded-2xl bg-black md:rounded-[2rem] lg:h-full lg:min-h-0">
+    <section className="min-h-svh w-full lg:h-screen">
+      <div className="relative min-h-svh w-full lg:h-full lg:min-h-0">
         {/* Background video */}
         <video
           autoPlay
@@ -77,14 +78,14 @@ export const PrismaHero = () => {
           playsInline
           preload="auto"
           className="absolute bottom-24 sm:bottom-0 h-full w-full object-cover"
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4"
+          src={video2}
         />
 
         {/* Noise overlay */}
         <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay" />
 
         {/* Gradient overlay */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-black/60" />
 
 
         {/* Hero content */}
@@ -111,8 +112,7 @@ export const PrismaHero = () => {
                 className="text-xs text-primary/70 sm:text-sm md:text-base"
                 style={{ lineHeight: 1.2 }}
               >
-                Prisma is a worldwide network of visual artists, filmmakers and storytellers bound not by place, status or labels but by passion and hunger to unlock potential through our unique perspectives.
-              </motion.p>
+AI Instructor and Software Developer with 3+ years of software development experience. Skilled in React and Next.js, with practical experience in Generative AI, prompt engineering, and AI tools. Experienced in delivering practical AI training and applying AI to real-world use cases.</motion.p>
 
               <motion.a
                 href={profile.resumeUrl}
