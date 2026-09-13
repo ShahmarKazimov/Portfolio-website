@@ -1,74 +1,99 @@
 import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
-import { experience, education } from "../data/content";
+import { experience } from "../data/content";
+import GenerativeTree from "./ui/GenerativeTree";
 
 export default function Experience() {
   return (
-    <section id="experience" className="border-b border-line px-6 py-24 md:px-10">
-      <div className="mx-auto max-w-7xl">
-        <SectionHeading eyebrow="Experience" title="A path from Finance to Development to AI." index="00 / 03" />
+    <section id="experience" className="relative min-h-screen overflow-hidden border-b border-line px-4 py-20 sm:px-6 md:px-10 md:py-24">
+      {/* Background Generative Tree Animation */}
+      <div className="absolute inset-0 z-0">
+        <GenerativeTree speed={1} particleAmount={1.2} opacity={0.9} brightness={1.2} />
+        {/* Transparent background overlay for text contrast */}
+        <div className="absolute inset-0 bg-ground/40 pointer-events-none" />
+      </div>
 
-        <div className="grid gap-16 lg:grid-cols-12">
-          <div className="lg:col-span-8">
-            <ol className="flex flex-col">
-              {experience.map((role, i) => (
-                <motion.li
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <SectionHeading
+          eyebrow="Experience"
+          title="A path from Finance to Development to AI."
+          index="00 / 03"
+        />
+
+        <div className="relative mt-12 md:mt-16">
+          {/* Vertical Timeline Line */}
+          {/* Mobile: left-5 (20px) | Desktop: md:left-1/2 (exact center) */}
+          <div className="absolute left-5 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-linear-to-b from-accent/70 via-accent/30 to-transparent z-10" />
+
+          <div className="flex flex-col gap-10 md:gap-14">
+            {experience.map((role, i) => {
+              const isEven = i % 2 === 0;
+              return (
+                <motion.div
                   key={role.role + role.period}
-                  initial={{ opacity: 0, x: -16 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.6, delay: i * 0.05 }}
-                  className="group grid grid-cols-1 gap-2 border-t border-line py-7 sm:grid-cols-12 sm:gap-6"
+                  initial={{ opacity: 0, y: 30, x: isEven ? -20 : 20 }}
+                  whileInView={{ opacity: 1, y: 0, x: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  className="relative flex flex-col md:flex-row items-center w-full"
                 >
-                  <span className="font-mono text-xs uppercase tracking-widest text-ink-faint sm:col-span-3">
-                    {role.period}
-                  </span>
-                  <div className="sm:col-span-9">
-                    <div className="mb-2 flex flex-wrap items-center gap-3">
-                      <h3 className="font-display text-xl font-medium text-ink">{role.role}</h3>
+                  {/* Timeline Dot Node */}
+                  {/* Mobile: left-5 | Desktop: md:left-1/2 */}
+                  <div className="absolute left-5 md:left-1/2 top-7 md:top-8 -translate-x-1/2 -translate-y-1/2 z-20 flex h-6 w-6 items-center justify-center">
+                    <span className="relative flex h-3.5 w-3.5">
                       {role.current && (
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-accent">
-                          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                          Current
-                        </span>
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
                       )}
-                    </div>
-                    <p className="mb-2 font-mono text-sm text-ink-faint">
-                      {role.org}
-                      {role.location && <span className="text-ink-faint/70"> · {role.location}</span>}
-                    </p>
-                    <p className="max-w-2xl text-sm leading-relaxed text-ink-dim">
-                      {role.description}
-                    </p>
+                      <span className={`relative inline-flex rounded-full h-3.5 w-3.5 ${role.current ? 'bg-accent shadow-[0_0_12px_#f59e0b]' : 'bg-amber-600/90 border border-accent/40'}`} />
+                    </span>
                   </div>
-                </motion.li>
-              ))}
-            </ol>
-          </div>
 
-          <div className="lg:col-span-4">
-            <p className="mb-6 font-mono text-xs uppercase tracking-widest text-ink-faint">
-              Education
-            </p>
-            <ol className="flex flex-col gap-6">
-              {education.map((ed, i) => (
-                <motion.li
-                  key={ed.program}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className="border-l-2 border-line pl-4"
-                >
-                  <p className="font-mono text-xs text-ink-faint">{ed.period}</p>
-                  <p className="mt-1 font-display text-base font-medium text-ink">{ed.program}</p>
-                  <p className="text-sm text-ink-dim">{ed.org}</p>
-                  {ed.detail && (
-                    <p className="mt-1 text-xs leading-relaxed text-ink-faint">{ed.detail}</p>
-                  )}
-                </motion.li>
-              ))}
-            </ol>
+                  {/* Card Container */}
+                  {/* Mobile: pl-10 (full width right of line) */}
+                  {/* Desktop: left card (isEven) vs right card (!isEven) with 4rem central gap */}
+                  <div
+                    className={`w-full pl-10 md:pl-0 ${
+                      isEven
+                        ? "md:w-[calc(50%-2rem)] md:mr-auto md:ml-0 md:text-right"
+                        : "md:w-[calc(50%-2rem)] md:ml-auto md:mr-0 md:text-left"
+                    }`}
+                  >
+                    <div className="group relative rounded-2xl border border-white/15 bg-ground/85 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-amber-500/60 hover:bg-ground/95 hover:shadow-[0_0_30px_rgba(245,158,11,0.2)]">
+                      <div
+                        className={`flex flex-wrap items-center gap-3 mb-2 ${
+                          isEven ? "md:justify-end" : "md:justify-start"
+                        }`}
+                      >
+                        <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
+                          {role.period}
+                        </span>
+                        {role.current && (
+                          <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/50 bg-accent/10 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-amber-300">
+                            <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                            Current
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 className="font-display text-xl font-medium text-ink group-hover:text-amber-100 transition-colors">
+                        {role.role}
+                      </h3>
+
+                      <p className="mt-1 font-mono text-sm text-ink-faint">
+                        {role.org}
+                        {role.location && (
+                          <span className="text-ink-faint/70"> · {role.location}</span>
+                        )}
+                      </p>
+
+                      <p className="mt-4 text-sm leading-relaxed text-ink-dim">
+                        {role.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>

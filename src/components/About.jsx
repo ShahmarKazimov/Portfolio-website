@@ -35,7 +35,7 @@ export default function About() {
               <div className="flex max-h-full flex-col gap-1 overflow-y-auto pr-2 custom-scrollbar">
                 {skills.map((group) => (
                   <div key={group.category}>
-                    <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-accent">
+                    <p className="mb-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-widest text-accent">
                       {group.category}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
@@ -68,7 +68,7 @@ export default function About() {
               </p>
 
               {/* Animated Skill Glass Bucket */}
-              <div className="mb-6 rounded-3xl border border-line bg-ground-raised/30 pb-8 pt-28 backdrop-blur-sm overflow-hidden">
+              <div className="mb-6 rounded-3xl border border-line bg-ground-raised/30 pb-8 pt-22 backdrop-blur-sm overflow-hidden">
                 <Bucket />
               </div>
             </div>

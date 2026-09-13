@@ -66,7 +66,7 @@ const Bucket = ({ chips = ALL_SKILL_CHIPS }) => {
   return (
     <div className="flex flex-col gap-4 items-center justify-center h-fit relative w-full">
       <div
-        className="relative isolate w-full max-w-163.75"
+        className="relative isolate w-full max-w-150"
         style={{ aspectRatio: "655/352" }}
       >
         <svg
@@ -846,7 +846,7 @@ const Bucket = ({ chips = ALL_SKILL_CHIPS }) => {
         <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
           <div
             className="relative w-full h-full flex justify-center items-center"
-            style={{ paddingBottom: "65%" }}
+            style={{ paddingBottom: "60%" }}
           >
             <AnimatePresence mode="popLayout">
               {items.map((chip, index) => {
@@ -877,9 +877,9 @@ const Bucket = ({ chips = ALL_SKILL_CHIPS }) => {
                       duration: 0.5,
                       ease: [0.455, 0.03, 0.515, 0.955],
                     }}
-                    className="bg-ground-raised/95 backdrop-blur-md border border-accent/40 z-10 rounded-full p-2.5 w-65 shadow-2xl absolute pointer-events-auto flex items-center gap-3 origin-bottom"
+                    className="bg-ground-raised/95 backdrop-blur-md border border-accent/40 z-10 rounded-full p-2 w-50 sm:w-65 shadow-2xl absolute pointer-events-auto flex items-center gap-3 origin-bottom"
                   >
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent">
+                    <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent">
                       {chip.icon ? (
                         <HugeiconsIcon icon={chip.icon} className="size-5" />
                       ) : (
@@ -887,10 +887,10 @@ const Bucket = ({ chips = ALL_SKILL_CHIPS }) => {
                       )}
                     </div>
                     <div className="flex flex-col gap-0.5 overflow-hidden">
-                      <span className="text-sm font-semibold text-content leading-none truncate">
+                      <span className="text-xs font-semibold text-content leading-none truncate">
                         {chip.title}
                       </span>
-                      <span className="text-[11px] font-mono text-content-muted/80 truncate">
+                      <span className="text-[8px] font-mono text-content-muted/80 truncate">
                         {chip.description}
                       </span>
                     </div>
@@ -915,7 +915,7 @@ const Bucket = ({ chips = ALL_SKILL_CHIPS }) => {
           <g filter="url(#filter0_i_51_65)">
             <path
               d="M512.766 79.1595L147.766 79.1624C136.453 79.1625 130.796 79.1626 127.281 82.6773C123.766 86.192 123.766 91.8488 123.766 103.162V327.159C123.766 338.473 123.766 344.13 127.281 347.645C130.796 351.159 136.453 351.159 147.766 351.159H512.766C524.08 351.159 529.737 351.159 533.252 347.645C536.766 344.13 536.766 338.473 536.766 327.159V103.159C536.766 91.8457 536.766 86.1888 533.252 82.6741C529.737 79.1594 524.08 79.1594 512.766 79.1595Z"
-              className="fill-ground-raised/40"
+              className="fill-ground-raised/90 border border-red-500"
             />
           </g>
 
