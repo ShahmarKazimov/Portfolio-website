@@ -6,7 +6,7 @@ import MagneticElement from "./ui/MagneticElement";
 
 export default function Projects() {
   return (
-    <section id="projects" className="border-b border-line px-6 py-24 md:px-10">
+    <section id="projects" className="border-b border-line px-6 py-12 sm:py-24 md:px-10">
       <div className="mx-auto max-w-7xl">
         <SectionHeading eyebrow="Selected Work" title="Three products, shipped end to end." index="00 / 05" />
 

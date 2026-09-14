@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
 import video2 from "../../assets/4.mp4";
 import { profile } from "../../data/content";
+import { DominoButton } from "./DominoButton";
 
 /* ---------------- WordsPullUp ---------------- */
 export const WordsPullUp = ({ text, className = "", showAsterisk = false, style }) => {
@@ -112,22 +113,23 @@ export const PrismaHero = () => {
                 className="text-xs text-primary/70 sm:text-sm md:text-base"
                 style={{ lineHeight: 1.2 }}
               >
-AI Instructor and Software Developer with 3+ years of software development experience. Skilled in React and Next.js, with practical experience in Generative AI, prompt engineering, and AI tools. Experienced in delivering practical AI training and applying AI to real-world use cases.</motion.p>
+                AI Instructor and Software Developer with 3+ years of software development experience. Skilled in React and Next.js, with practical experience in Generative AI, prompt engineering, and AI tools. Experienced in delivering practical AI training and applying AI to real-world use cases.</motion.p>
 
-              <motion.a
-                href={profile.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="group inline-flex items-center gap-2 self-start rounded-full bg-accent py-1 pl-5 pr-1 text-sm font-medium text-black transition-all cursor-pointer sm:text-base"
+                className="self-start"
               >
-                Download CV
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black sm:h-10 sm:w-10">
-                  <ArrowRight className="h-4 w-4" style={{ color: "#E1E0CC" }} />
-                </span>
-              </motion.a>
+                <DominoButton
+                  href={profile.resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download CV
+                  <ArrowRight className="h-4 w-4" />
+                </DominoButton>
+              </motion.div>
             </div>
           </div>
         </div>

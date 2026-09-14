@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import SectionHeading from "./SectionHeading";
-import { profile, skills, languages } from "../data/content";
+import { skills, languages } from "../data/content";
 import useReducedMotion from "../hooks/useReducedMotion";
 import Bucket from "./ui/bucket";
 
@@ -15,7 +15,7 @@ export default function About() {
   const fgY = useTransform(scrollYProgress, [0, 1], [reduced ? 0 : -90, reduced ? 0 : 90]);
 
   return (
-    <section ref={sectionRef} id="about" className="relative overflow-hidden border-b border-line px-6 py-24 md:px-10">
+    <section ref={sectionRef} id="about" className="relative overflow-hidden border-b border-line px-6 py-6 sm:py-24 md:px-10">
       <div className="relative mx-auto max-w-7xl">
         <SectionHeading eyebrow="Skills" title="Technical Skills • AI Expertise • Languages" index="00 / 01" />
 
@@ -32,7 +32,7 @@ export default function About() {
               <p className="mb-4 font-mono text-xs uppercase tracking-widest text-ink-faint">
                 Skills & Technologies
               </p>
-              <div className="flex max-h-full flex-col gap-1 overflow-y-auto pr-2 custom-scrollbar">
+              <div className="flex max-h-full flex-col gap-2 overflow-y-auto pr-2 custom-scrollbar">
                 {skills.map((group) => (
                   <div key={group.category}>
                     <p className="mb-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-widest text-accent">
@@ -52,6 +52,19 @@ export default function About() {
                 ))}
               </div>
             </div>
+            <div className="block md:hidden border-t border-b border-line py-6">
+              <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-faint">
+                Languages
+              </p>
+              <ul className="flex flex-col gap-2">
+                {languages.map((l) => (
+                  <li key={l.name} className="flex items-baseline justify-between gap-4 text-sm">
+                    <span className="text-ink-dim">{l.name}</span>
+                    <span className="font-mono text-xs text-ink-faint">{l.level}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </motion.div>
 
           {/* Sağ hisse: Animated Skill Glass Bucket + Languages */}
@@ -68,12 +81,12 @@ export default function About() {
               </p>
 
               {/* Animated Skill Glass Bucket */}
-              <div className="mb-6 rounded-3xl border border-line bg-ground-raised/30 pb-8 pt-22 backdrop-blur-sm overflow-hidden">
+              <div className="rounded-3xl border border-line bg-ground-raised/30 pb-10 mb-24 sm:pb-8 pt-20 backdrop-blur-sm overflow-hidden">
                 <Bucket />
               </div>
             </div>
 
-            <div className="border-t border-line pt-6">
+            <div className="hidden md:block border-t border-b border-line py-6">
               <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-faint">
                 Languages
               </p>

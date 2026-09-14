@@ -1,9 +1,26 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 import { experience } from "../data/content";
 import GenerativeTree from "./ui/GenerativeTree";
+import useReducedMotion from "../hooks/useReducedMotion";
 
 export default function Experience() {
+  const containerRef = useRef(null);
+  const reduced = useReducedMotion();
+
+  // Scroll progress for the timeline line height animation
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 70%", "end 60%"],
+  });
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
     <section id="experience" className="relative min-h-screen overflow-hidden border-b border-line px-4 py-20 sm:px-6 md:px-10 md:py-24">
       {/* Background Generative Tree Animation */}
@@ -20,47 +37,87 @@ export default function Experience() {
           index="00 / 03"
         />
 
-        <div className="relative mt-12 md:mt-16">
-          {/* Vertical Timeline Line */}
-          {/* Mobile: left-5 (20px) | Desktop: md:left-1/2 (exact center) */}
-          <div className="absolute left-5 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-linear-to-b from-accent/70 via-accent/30 to-transparent z-10" />
+        <div ref={containerRef} className="relative mt-12 md:mt-16">
+          {/* Background Timeline Rail */}
+          <div className="absolute left-5 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-white/10 z-0" />
 
-          <div className="flex flex-col gap-10 md:gap-14">
+          {/* Animated Dynamic Scroll Timeline Line */}
+          {!reduced && (
+            <motion.div
+              style={{ scaleY, originY: 0 }}
+              className="absolute left-5 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-linear-to-b from-amber-400 via-amber-500 to-amber-600/20 z-10 shadow-[0_0_12px_#f59e0b]"
+            />
+          )}
+
+          <div className="flex flex-col gap-12 md:gap-16">
             {experience.map((role, i) => {
               const isEven = i % 2 === 0;
               return (
-                <motion.div
+                <div
                   key={role.role + role.period}
-                  initial={{ opacity: 0, y: 30, x: isEven ? -20 : 20 }}
-                  whileInView={{ opacity: 1, y: 0, x: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
                   className="relative flex flex-col md:flex-row items-center w-full"
                 >
-                  {/* Timeline Dot Node */}
-                  {/* Mobile: left-5 | Desktop: md:left-1/2 */}
-                  <div className="absolute left-5 md:left-1/2 top-7 md:top-8 -translate-x-1/2 -translate-y-1/2 z-20 flex h-6 w-6 items-center justify-center">
-                    <span className="relative flex h-3.5 w-3.5">
+                  {/* Timeline Dot Node with Spring Pop Animation */}
+                  <motion.div
+                    initial={reduced ? { opacity: 1 } : { scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                      delay: i * 0.15,
+                    }}
+                    className="absolute left-5 md:left-1/2 top-7 md:top-8 -translate-x-1/2 -translate-y-1/2 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-ground/90 border border-amber-500/40 backdrop-blur-sm shadow-[0_0_15px_rgba(245,158,11,0.3)]"
+                  >
+                    <span className="relative flex h-3.5 w-3.5 items-center justify-center">
                       {role.current && (
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
                       )}
-                      <span className={`relative inline-flex rounded-full h-3.5 w-3.5 ${role.current ? 'bg-accent shadow-[0_0_12px_#f59e0b]' : 'bg-amber-600/90 border border-accent/40'}`} />
+                      <span
+                        className={`relative inline-flex rounded-full h-3 w-3 ${
+                          role.current
+                            ? "bg-accent shadow-[0_0_12px_#f59e0b]"
+                            : "bg-amber-500/80"
+                        }`}
+                      />
                     </span>
-                  </div>
+                  </motion.div>
 
-                  {/* Card Container */}
-                  {/* Mobile: pl-10 (full width right of line) */}
-                  {/* Desktop: left card (isEven) vs right card (!isEven) with 4rem central gap */}
+                  {/* Card Container with Smooth Slide & Scale Animation */}
                   <div
-                    className={`w-full pl-10 md:pl-0 ${
+                    className={`w-full pl-12 md:pl-0 ${
                       isEven
-                        ? "md:w-[calc(50%-2rem)] md:mr-auto md:ml-0 md:text-right"
-                        : "md:w-[calc(50%-2rem)] md:ml-auto md:mr-0 md:text-left"
+                        ? "md:w-[calc(50%-2.5rem)] md:mr-auto md:ml-0 md:text-right"
+                        : "md:w-[calc(50%-2.5rem)] md:ml-auto md:mr-0 md:text-left"
                     }`}
                   >
-                    <div className="group relative rounded-2xl border border-white/15 bg-ground/85 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-amber-500/60 hover:bg-ground/95 hover:shadow-[0_0_30px_rgba(245,158,11,0.2)]">
+                    <motion.div
+                      initial={
+                        reduced
+                          ? { opacity: 1 }
+                          : {
+                              opacity: 0,
+                              y: 40,
+                              x: isEven ? -40 : 40,
+                              scale: 0.96,
+                            }
+                      }
+                      whileInView={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+                      viewport={{ once: true, margin: "-70px" }}
+                      transition={{
+                        duration: 0.7,
+                        delay: i * 0.12,
+                        ease: [0.21, 0.47, 0.32, 0.98],
+                      }}
+                      whileHover={reduced ? {} : { y: -4, transition: { duration: 0.2 } }}
+                      className="group relative rounded-2xl border border-white/15 bg-ground/85 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-amber-500/60 hover:bg-ground/95 hover:shadow-[0_0_35px_rgba(245,158,11,0.22)]"
+                    >
+                      {/* Ambient card accent glow on hover */}
+                      <div className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-linear-to-r from-amber-500/10 via-transparent to-amber-500/5" />
+
                       <div
-                        className={`flex flex-wrap items-center gap-3 mb-2 ${
+                        className={`relative z-10 flex flex-wrap items-center gap-3 mb-2 ${
                           isEven ? "md:justify-end" : "md:justify-start"
                         }`}
                       >
@@ -75,23 +132,23 @@ export default function Experience() {
                         )}
                       </div>
 
-                      <h3 className="font-display text-xl font-medium text-ink group-hover:text-amber-100 transition-colors">
+                      <h3 className="relative z-10 font-display text-xl font-medium text-ink group-hover:text-amber-100 transition-colors">
                         {role.role}
                       </h3>
 
-                      <p className="mt-1 font-mono text-sm text-ink-faint">
+                      <p className="relative z-10 mt-1 font-mono text-sm text-ink-faint">
                         {role.org}
                         {role.location && (
                           <span className="text-ink-faint/70"> · {role.location}</span>
                         )}
                       </p>
 
-                      <p className="mt-4 text-sm leading-relaxed text-ink-dim">
+                      <p className="relative z-10 mt-4 text-sm leading-relaxed text-ink-dim">
                         {role.description}
                       </p>
-                    </div>
+                    </motion.div>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>

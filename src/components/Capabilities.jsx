@@ -13,7 +13,7 @@ export default function Capabilities() {
   const active = pointerCapable && !reduced;
 
   return (
-    <section id="capabilities" className="relative overflow-hidden border-b border-line px-6 py-24 md:px-10">
+    <section id="capabilities" className="relative overflow-hidden border-b border-line px-6 py-12 sm:py-24 md:px-10">
       {/* abstract node/connection field — stands in for the AI/agentic thread
           of the section without literal robot/brain iconography */}
       {!reduced && (

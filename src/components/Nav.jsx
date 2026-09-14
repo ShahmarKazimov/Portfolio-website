@@ -46,7 +46,7 @@ export default function Nav() {
           <button
             type="button"
             onClick={() => setLang("en")}
-            className={`rounded-full px-3 border py-1 transition-colors cursor-pointer ${lang === "en" ? "bg-accent border border-accent text-ground" : "text-white border  hover:text-ink"
+            className={`rounded-lg px-3 border py-1 transition-colors cursor-pointer ${lang === "en" ? "bg-accent border border-accent text-ground" : "text-white border  hover:text-ink"
               }`}
           >
             En
@@ -54,7 +54,7 @@ export default function Nav() {
           <button
             type="button"
             onClick={() => setLang("az")}
-            className={`rounded-full px-3 py-1 transition-colors cursor-pointer ${lang === "az" ? "bg-accent border border-accent text-ground": "text-white border border-white hover:text-ink"
+            className={`rounded-lg px-3 py-1 transition-colors cursor-pointer ${lang === "az" ? "bg-accent border border-accent text-ground" : "text-white border border-white hover:text-ink"
               }`}
           >
             Az
@@ -101,7 +101,7 @@ export default function Nav() {
                 </a>
               </li>
             ))}
-          
+
             <li className="flex items-center gap-1 pt-2 font-mono text-xs uppercase tracking-widest">
               <button
                 type="button"

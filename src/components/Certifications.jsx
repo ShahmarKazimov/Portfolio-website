@@ -7,7 +7,7 @@ const totalCount = certifications.reduce((sum, group) => sum + group.items.lengt
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="border-b border-line px-6 py-24 md:px-10">
+    <section id="certifications" className="border-b border-line px-6 py-12 sm:py-24 md:px-10">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Certifications"

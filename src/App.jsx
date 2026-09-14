@@ -9,10 +9,12 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import CursorGlow from "./components/ui/CursorGlow";
+import Preloader from "./components/ui/Preloader";
 
 export default function App() {
   return (
     <div className="relative min-h-screen bg-black text-ink">
+      <Preloader />
       <div className="noise" />
       <CursorGlow />
       <div className="relative z-10">
