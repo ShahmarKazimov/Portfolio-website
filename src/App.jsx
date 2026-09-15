@@ -1,7 +1,6 @@
 import Nav from "./components/Nav";
 import PrismaHero from "./components/ui/PrismaHero";
 import About from "./components/About";
-import Capabilities from "./components/Capabilities";
 import Experience from "./components/Experience";
 import Education from "./components/Education";
 import Certifications from "./components/Certifications";
@@ -22,7 +21,6 @@ export default function App() {
         <main>
           <PrismaHero />
           <About />
-          <Capabilities />
           <Experience />
           <Education />
           <Certifications />

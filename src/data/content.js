@@ -1,6 +1,5 @@
 export const nav = [
   { label: "About", href: "#about" },
-  { label: "Capabilities", href: "#capabilities" },
   { label: "Experience", href: "#experience" },
   { label: "Education", href: "#education" },
   { label: "Certifications", href: "#certifications" },
@@ -28,36 +27,6 @@ export const languages = [
   { name: "English", level: "Limited working proficiency" },
 ];
 
-export const capabilities = [
-  {
-    index: "01",
-    title: "AI Education & Mentoring",
-    description:
-      "Teaching frontend engineers how to think, build, and ship faster using AI-assisted workflows — from prompt design to reviewing AI-generated code with a critical eye.",
-    tags: ["Mentoring", "Curriculum", "AI Workflows", "Code Review"],
-  },
-  {
-    index: "02",
-    title: "Practical AI & Agentic Tooling",
-    description:
-      "Applying AI tools inside real development workflows — prompt engineering, agentic coding assistants, and automation that removes repetitive work without cutting corners.",
-    tags: ["Prompt Engineering", "Agentic AI", "AI Agents", "n8n"],
-  },
-  {
-    index: "03",
-    title: "Software Development",
-    description:
-      "Building performant, accessible interfaces with React and Next.js — from component architecture to API integration and cross-browser polish.",
-    tags: ["React.js", "Next.js", "TypeScript", "REST API"],
-  },
-  {
-    index: "04",
-    title: "Interface Craft",
-    description:
-      "Design-conscious front-end work: responsive systems, motion, and interaction details that make a product feel considered rather than assembled.",
-    tags: ["Responsive Design", "Component Architecture", "TailwindCSS", "Accessibility"],
-  },
-];
 
 // Categorized skill set, transcribed from the CV. Rendered as labeled groups
 // rather than a single flat tag cloud.

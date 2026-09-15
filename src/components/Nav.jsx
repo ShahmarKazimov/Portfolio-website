@@ -66,17 +66,17 @@ export default function Nav() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center pr-[2px] justify-end rounded-full text-ink lg:hidden"
+          className="flex h-10 w-10 items-center pr-0.5 justify-end rounded-full text-ink lg:hidden"
         >
           <span className="relative block h-4 w-4">
             <span
-              className={`absolute -left-0.5 top-0 h-[1.2px] w-5 bg-white transition-transform ${open ? "translate-y-[6px] rotate-45" : ""}`}
+              className={`absolute -left-0.5 top-0 h-[1.2px] w-5 bg-white transition-transform ${open ? "translate-y-1.5 rotate-45" : ""}`}
             />
             <span
-              className={`absolute left-0 top-2 h-[1.2px] w-3 bg-white transition-transform ${open ? "hidden -translate-y-[6px] -rotate-45" : ""}`}
+              className={`absolute left-0 top-2 h-[1.2px] w-3 bg-white transition-transform ${open ? "hidden -translate-y-1.5 -rotate-45" : ""}`}
             />
             <span
-              className={`absolute -left-0.5 top-4 h-[1.2px] w-5 bg-white transition-transform ${open ? "-translate-y-[10px] -rotate-45" : ""}`}
+              className={`absolute -left-0.5 top-4 h-[1.2px] w-5 bg-white transition-transform ${open ? "-translate-y-1.5 -rotate-45" : ""}`}
             />
           </span>
         </motion.button>

@@ -34,7 +34,7 @@ export default function Experience() {
         <SectionHeading
           eyebrow="Experience"
           title="A path from Finance to Development to AI."
-          index="00 / 03"
+          index="00 / 02"
         />
 
         <div ref={containerRef} className="relative mt-12 md:mt-16">
@@ -98,12 +98,10 @@ export default function Experience() {
                           ? { opacity: 1 }
                           : {
                               opacity: 0,
-                              y: 40,
-                              x: isEven ? -40 : 40,
-                              scale: 0.96,
+                              y: 0,
                             }
                       }
-                      whileInView={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-70px" }}
                       transition={{
                         duration: 0.7,
