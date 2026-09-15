@@ -319,7 +319,7 @@ export const projects = [
     category: "E-Commerce · Watches",
     description:
       "An e-commerce experience for a watch retailer, covering product browsing, filtering, and a polished purchase flow.",
-    stack: ["React", "Next.js", "JavaScript", "TypeScript"],
+    stack: ["React", "Node.js", "TypeScript"],
     link: "https://eclipse-ecommerce-website.vercel.app/",
     linkLabel: "Live demo",
   },
@@ -331,6 +331,26 @@ export const projects = [
       "A booking platform built with React/Next.js, designed around a fast, dependable reservation flow.",
     stack: ["React", "Next.js"],
     link: "https://area36.az/",
+    linkLabel: "Live demo",
+  },
+  {
+    number: "04",
+    name: "Portfolio",
+    category: "Portfolio Platform",
+    description:
+      "A modern portfolio website created with Claude Code and Antigravity to showcase my work, skills, and AI expertise.",
+    stack: ["React", "Framer Motion", "Tailwind CSS"],
+    link: "https://shahmar-portfolio.vercel.app/",
+    linkLabel: "Live demo",
+  },
+  {
+    number: "05",
+    name: "Linea",
+    category: "Construction Website",
+    description:
+      "A modern interior design and construction website built to showcase services, projects, and completed work.",
+    stack: ["Next.js", "React", "C#", "TypeScript"],
+    link: "https://linea-construction-website.vercel.app/",
     linkLabel: "Live demo",
   },
 ];

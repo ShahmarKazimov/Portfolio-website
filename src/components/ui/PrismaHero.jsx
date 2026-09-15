@@ -78,7 +78,7 @@ export const PrismaHero = () => {
           muted
           playsInline
           preload="auto"
-          className="absolute bottom-24 sm:bottom-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
           src={video2}
         />
 
@@ -90,36 +90,37 @@ export const PrismaHero = () => {
 
 
         {/* Hero content */}
-        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-4 sm:px-0 pb-6 sm:pb-8">
-          <div className="grid grid-cols-12 items-end gap-4">
-            <div className="col-span-12 lg:col-span-8">
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 lg:top-auto lg:translate-y-0 lg:bottom-0 mx-auto max-w-7xl px-4 sm:px-6 pb-0 lg:pb-8">
+          <div className="grid grid-cols-12 items-center lg:items-end gap-6 lg:gap-4 text-center lg:text-left">
+            <div className="col-span-12 lg:col-span-8 flex flex-col items-center lg:items-start">
               <h1
-                className="font-medium leading-[0.8] tracking-[-0.04em] text-[15vw] sm:text-[13vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[7vw]"
+                className="font-medium leading-[0.8] tracking-[-0.04em] text-[14vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[7vw]"
                 style={{ color: "#E1E0CC" }}
               >
                 <WordsPullUp text="Shahmar " showAsterisk />
                 <WordsPullUp
-                  className="text-accent ml-0 sm:ml-6 md:ml-10 lg:ml-16 xl:ml-50 text-[13vw] sm:text-[13vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[6vw]"
+                  className="text-accent ml-0 lg:ml-16 xl:ml-50 text-[13vw] sm:text-[13vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[6vw]"
                   text="Kazimov"
                 />
               </h1>
             </div>
 
-            <div className="col-span-12 flex flex-col gap-4 pb-1 sm:gap-5 lg:col-span-4">
+            <div className="col-span-12 flex flex-col items-center lg:items-start gap-4 pb-1 sm:gap-5 lg:col-span-4">
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="text-xs text-primary/70 sm:text-sm md:text-base"
-                style={{ lineHeight: 1.2 }}
+                className="text-xs text-primary/70 sm:text-sm md:text-base max-w-md lg:max-w-none text-center lg:text-left"
+                style={{ lineHeight: 1.3 }}
               >
-                AI Instructor and Software Developer with 3+ years of software development experience. Skilled in React and Next.js, with practical experience in Generative AI, prompt engineering, and AI tools. Experienced in delivering practical AI training and applying AI to real-world use cases.</motion.p>
+                AI Instructor and Software Developer with 3+ years of software development experience. Skilled in React and Next.js, with practical experience in Generative AI, prompt engineering, and AI tools. Experienced in delivering practical AI training and applying AI to real-world use cases.
+              </motion.p>
 
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="self-start"
+                className="self-center lg:self-start"
               >
                 <DominoButton
                   href={profile.resumeUrl}
