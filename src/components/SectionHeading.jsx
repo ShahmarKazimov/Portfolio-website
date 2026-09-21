@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function SectionHeading({ eyebrow, title, index }) {
   return (
-    <div className="mb-14 flex items-end justify-between gap-6 border-b border-line pb-6">
+    <div className="mb-24 flex items-end justify-between gap-6 border-b border-line pb-6">
       <div>
         <motion.p
           initial={{ opacity: 0, y: 10 }}

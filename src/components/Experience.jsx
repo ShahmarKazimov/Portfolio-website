@@ -12,12 +12,12 @@ export default function Experience() {
   // Scroll progress for the timeline line height animation
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 70%", "end 60%"],
+    offset: ["start 85%", "end 80%"],
   });
 
   const scaleY = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 200,
+    damping: 25,
     restDelta: 0.001,
   });
 
@@ -61,12 +61,11 @@ export default function Experience() {
                   <motion.div
                     initial={reduced ? { opacity: 1 } : { scale: 0, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true, margin: "-60px" }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{
                       type: "spring",
-                      stiffness: 300,
-                      damping: 20,
-                      delay: i * 0.15,
+                      stiffness: 350,
+                      damping: 22,
                     }}
                     className="absolute left-5 md:left-1/2 top-7 md:top-8 -translate-x-1/2 -translate-y-1/2 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-ground/90 border border-amber-500/40 backdrop-blur-sm shadow-[0_0_15px_rgba(245,158,11,0.3)]"
                   >
@@ -98,15 +97,14 @@ export default function Experience() {
                           ? { opacity: 1 }
                           : {
                               opacity: 0,
-                              y: 0,
+                              y: 15,
                             }
                       }
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-70px" }}
+                      viewport={{ once: true, amount: 0.15 }}
                       transition={{
-                        duration: 0.7,
-                        delay: i * 0.12,
-                        ease: [0.21, 0.47, 0.32, 0.98],
+                        duration: 0.4,
+                        ease: "easeOut",
                       }}
                       whileHover={reduced ? {} : { y: -4, transition: { duration: 0.2 } }}
                       className="group relative rounded-2xl border border-white/15 bg-ground/85 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-amber-500/60 hover:bg-ground/95 hover:shadow-[0_0_35px_rgba(245,158,11,0.22)]"

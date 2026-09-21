@@ -55,9 +55,6 @@ export default function FancyTextHover({
         text.split('').forEach((char, i) => {
           const outer = document.createElement('span')
           outer.className = 'inline-block'
-          gsap.set(outer, {
-            transition: 'transform 0.3s cubic-bezier(0.76, 0, 0.24, 1)',
-          })
 
           const inner = document.createElement('span')
           inner.className = 'inline-block'
@@ -70,9 +67,10 @@ export default function FancyTextHover({
           outer.appendChild(inner)
           anchor.appendChild(outer)
 
-          const randomDelay = Math.floor(Math.random() * 5)
+          const charStagger = i * 0.015
 
           const onEnter = () => {
+            gsap.killTweensOf([outer, inner])
             const childIndex = (i % 15) + 1
             const transform = SCATTER_TRANSFORMS[childIndex]
             if (transform) {
@@ -80,35 +78,36 @@ export default function FancyTextHover({
                 xPercent: parseFloat(transform.x),
                 yPercent: parseFloat(transform.y),
                 rotation: transform.rotate,
-                duration: 0.2,
-                ease: 'power3.inOut',
+                duration: 0.15,
+                delay: charStagger,
+                ease: 'power2.out',
               })
             }
 
             gsap.to(inner, {
               keyframes: [
                 { yPercent: 0, duration: 0 },
-                { yPercent: -3, duration: 2.5, ease: 'power3.inOut' },
-                { yPercent: 0, duration: 2.5, ease: 'power3.inOut' },
+                { yPercent: -4, duration: 0.6, ease: 'power2.inOut' },
+                { yPercent: 0, duration: 0.6, ease: 'power2.inOut' },
               ],
               repeat: -1,
-              delay: randomDelay,
+              ease: 'none',
             })
           }
 
           const onLeave = () => {
-            gsap.killTweensOf(inner)
+            gsap.killTweensOf([outer, inner])
             gsap.to(outer, {
               xPercent: 0,
               yPercent: 0,
               rotation: 0,
-              duration: 0.35,
-              ease: 'power3.inOut',
+              duration: 0.2,
+              ease: 'power2.out',
             })
             gsap.to(inner, {
               yPercent: 0,
-              duration: 0.35,
-              ease: 'power3.inOut',
+              duration: 0.2,
+              ease: 'power2.out',
             })
           }
 

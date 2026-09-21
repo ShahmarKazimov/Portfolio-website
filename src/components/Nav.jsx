@@ -61,32 +61,32 @@ export default function Nav() {
           </button>
         </div>
 
-        <motion.button
-          whileTap={{ scale: 0.9 }}
+        <button
+          type="button"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center pr-0.5 justify-end rounded-full text-ink lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full text-white lg:hidden cursor-pointer"
         >
-          <span className="relative block h-4 w-4">
+          <div className="relative flex h-4 w-5 flex-col justify-between items-center">
+            {/* Top Line */}
             <span
-              className={`absolute -left-0.5 top-0 h-[1.2px] w-5 bg-white transition-transform ${open ? "translate-y-1.5 rotate-45" : ""}`}
+              className={`h-[1.5px] w-5 bg-white rounded-full transition-none ${open ? "translate-y-1.75 rotate-45" : ""}`}
             />
+            {/* Middle Line */}
             <span
-              className={`absolute left-0 top-2 h-[1.2px] w-3 bg-white transition-transform ${open ? "hidden -translate-y-1.5 -rotate-45" : ""}`}
+              className={`h-[1.5px] w-5 bg-white rounded-full transition-none ${open ? "opacity-0 scale-x-0" : ""}`}
             />
+            {/* Bottom Line */}
             <span
-              className={`absolute -left-0.5 top-4 h-[1.2px] w-5 bg-white transition-transform ${open ? "-translate-y-1.5 -rotate-45" : ""}`}
+              className={`h-[1.5px] w-5 bg-white rounded-full transition-none ${open ? "-translate-y-1.75 -rotate-45" : ""}`}
             />
-          </span>
-        </motion.button>
+          </div>
+        </button>
       </nav>
 
       {open && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
+        <div
           className="border-t border-line bg-ground -mt-20 lg:hidden"
         >
           <ul className="flex flex-col px-6 pt-20 pb-10">
@@ -121,7 +121,7 @@ export default function Nav() {
               </button>
             </li>
           </ul>
-        </motion.div>
+        </div>
       )}
     </header>
   );

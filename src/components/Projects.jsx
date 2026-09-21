@@ -111,6 +111,26 @@ export function CardStack({
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
+      {/* Top Center Active Project Link */}
+      {activeItem?.href && (
+        <div className="mb-6 flex justify-center items-center w-full">
+          <a
+            href={activeItem.href}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex flex-row gap-2.5 justify-center items-center group cursor-pointer max-w-full px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 hover:border-amber-500/50 transition-all shadow-md"
+            aria-label={`Open link for ${activeItem.title}`}
+          >
+            <span className="flex sm:h-7 sm:w-7 h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-amber-300 transition group-hover:bg-amber-500/30">
+              <SquareArrowOutUpRight className="h-3.5 w-3.5" />
+            </span>
+            <h3 className="text-xs sm:text-base font-mono uppercase tracking-widest text-amber-300 font-bold transition-colors group-hover:text-amber-200 truncate">
+              {activeItem.title}
+            </h3>
+          </a>
+        </div>
+      )}
+
       {/* Stage */}
       <div
         className="relative w-full focus:outline-none flex items-center justify-center"
@@ -274,23 +294,6 @@ export function CardStack({
             >
               <ChevronRight className="h-3 w-4" />
             </button>
-
-            {activeItem?.href ? (
-              <a
-                href={activeItem.href}
-                target="_blank"
-                rel="noreferrer"
-                className="flex flex-row gap-2 justify-center items-center group cursor-pointer max-w-full"
-                aria-label={`Open link for ${activeItem.title}`}
-              >
-                <span className="flex sm:h-9 sm:w-9 h-7 w-7 shrink-0 items-center justify-center rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 transition group-hover:bg-amber-500/20 group-hover:border-amber-500/50 active:scale-95">
-                  <SquareArrowOutUpRight className="h-3 w-3" />
-                </span>
-                <h1 className="text-[10px] sm:text-sm font-mono uppercase tracking-widest text-amber-300 font-semibold transition-colors group-hover:text-amber-200 truncate">
-                  {activeItem.title}
-                </h1>
-              </a>
-            ) : null}
           </div>
         </div>
       ) : null}

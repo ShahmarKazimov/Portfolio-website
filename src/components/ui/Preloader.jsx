@@ -76,7 +76,7 @@ export default function Preloader() {
               width: 20%;
               height: 60%;
               content: '';
-              background-color: rgba(255, 255, 255, 0.3);
+              background-color: rgba(255, 255, 255, 0.6);
               position: absolute;
               bottom: -8%;
               left: 5px;
