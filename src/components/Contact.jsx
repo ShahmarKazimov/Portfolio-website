@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import { profile } from "../data/content";
 import FancyTextHover from "./ui/FancyTextHover";
 import { InteractiveTravelCard } from "./ui/InteractiveTravelCard";
 import profilePictureUrl from "../assets/profile-picture.png";
 
 export default function Contact() {
+  const formRef = useRef(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,15 +15,46 @@ export default function Contact() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.message) return;
-    setSubmitted(true);
-    setTimeout(() => {
+    
+    setLoading(true);
+    setErrorMsg("");
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    try {
+      const templateParams = {
+        name: formData.name,
+        fullname: formData.name,
+        from_name: formData.name,
+        email: formData.email,
+        from_email: formData.email,
+        reply_to: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      setSubmitted(true);
       setFormData({ name: "", email: "", subject: "", message: "" });
-      setSubmitted(false);
-    }, 4000);
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 6000);
+    } catch (err) {
+      console.error("EmailJS Error:", err);
+      const errText = err?.text || err?.message || "Xəta baş verdi";
+      setErrorMsg(`Email göndərilmədi: ${errText}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -53,7 +86,7 @@ export default function Contact() {
           transition={{ duration: 0.7 }}
           className="max-w-3xl font-display text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-5xl"
         >
-          Let's build something worthwhile.
+          Let’s make ideas real.
         </motion.h2>
 
         <motion.div
@@ -93,6 +126,12 @@ export default function Contact() {
               </p>
             </div>
 
+            {errorMsg && (
+              <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-xs text-red-400">
+                {errorMsg}
+              </div>
+            )}
+
             {submitted ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -100,10 +139,10 @@ export default function Contact() {
                 className="my-6 rounded-xl border border-accent/30 bg-accent/10 p-6 text-center"
               >
                 <p className="font-display text-lg font-medium text-accent">Thank you for reaching out!</p>
-                <p className="mt-1 text-xs text-ink-dim">Your message has been received. I will respond as soon as possible.</p>
+                <p className="mt-1 text-xs text-ink-dim">Your message has been sent successfully. I will respond as soon as possible.</p>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div className="flex flex-col gap-1.5">
                     <label htmlFor="name" className="font-mono text-xs text-ink-dim">
@@ -117,7 +156,7 @@ export default function Contact() {
                       onChange={handleChange}
                       placeholder="Your name"
                       required
-                      className="rounded-lg border border-line bg-ground px-4 py-2.5 text-sm text-ink outline-none transition focus:ring-1 focus:ring-accent"
+                      className="rounded-lg border border-line bg-ground px-4 py-2.5 text-sm placeholder:text-ink-faint/40 outline-none transition focus:ring-1 focus:ring-accent"
                     />
                   </div>
 
@@ -133,7 +172,7 @@ export default function Contact() {
                       onChange={handleChange}
                       placeholder="your.email@example.com"
                       required
-                      className="rounded-lg border border-line bg-ground px-4 py-2.5 text-sm text-ink outline-none transition focus:ring-1 focus:ring-accent"
+                      className="rounded-lg border border-line bg-ground px-4 py-2.5 text-sm placeholder:text-ink-faint/40 outline-none transition focus:ring-1 focus:ring-accent"
                     />
                   </div>
                 </div>
@@ -149,7 +188,7 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="Project Inquiry / Collaboration"
-                    className="rounded-lg border border-line bg-ground px-4 py-2.5 text-sm text-ink outline-none transition focus:ring-1 focus:ring-accent"
+                    className="rounded-lg border border-line bg-ground px-4 py-2.5 text-sm placeholder:text-ink-faint/40 outline-none transition focus:ring-1 focus:ring-accent"
                   />
                 </div>
 
@@ -165,15 +204,16 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="Tell me about your project or idea..."
                     required
-                    className="resize-none rounded-lg border border-line bg-ground px-4 py-2.5 text-sm text-ink outline-none transition focus:ring-1 focus:ring-accent"
+                    className="resize-none rounded-lg border border-line bg-ground px-4 py-2.5 text-sm placeholder:text-ink-faint/40 outline-none transition focus:ring-1 focus:ring-accent"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-ground transition hover:bg-accent/90 active:scale-[0.98] cursor-pointer"
+                  disabled={loading}
+                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-ground transition hover:bg-accent/90 active:scale-[0.98] cursor-pointer disabled:opacity-50"
                 >
-                  <span>Send Message</span>
+                  <span>{loading ? "Sending..." : "Send Message"}</span>
                   <span className="text-base">→</span>
                 </button>
               </form>

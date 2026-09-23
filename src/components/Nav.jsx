@@ -16,6 +16,17 @@ export default function Nav() {
   }, []);
 
   useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  useEffect(() => {
     const sectionElements = nav
       .map((item) => item.href.replace("#", ""))
       .map((id) => document.getElementById(id))
@@ -65,90 +76,76 @@ export default function Nav() {
           })}
         </ul>
 
-        <div className="hidden items-center gap-1 font-mono text-xs uppercase tracking-widest lg:absolute lg:top-2 py-3 lg:right-0 lg:flex">
-          <button
-            type="button"
-            onClick={() => setLang("en")}
-            className={`rounded-lg px-3 border py-1 transition-colors cursor-pointer ${lang === "en" ? "bg-accent border border-accent text-ground" : "text-white border  hover:text-ink"
-              }`}
-          >
-            En
-          </button>
-          <button
-            type="button"
-            onClick={() => setLang("az")}
-            className={`rounded-lg px-3 py-1 transition-colors cursor-pointer ${lang === "az" ? "bg-accent border border-accent text-ground" : "text-white border border-white hover:text-ink"
-              }`}
-          >
-            Az
-          </button>
-        </div>
+        {!open && (
+          <div className="hidden items-center gap-1 font-mono text-xs uppercase tracking-widest lg:absolute lg:top-2 py-3 lg:right-0 lg:flex">
+            <button
+              type="button"
+              onClick={() => setLang("en")}
+              className={`rounded-lg px-3 border py-1 transition-colors cursor-pointer ${lang === "en" ? "bg-accent border border-accent text-ground" : "text-white border hover:text-ink"
+                }`}
+            >
+              En
+            </button>
+            <button
+              type="button"
+              onClick={() => setLang("az")}
+              className={`rounded-lg px-3 py-1 transition-colors cursor-pointer ${lang === "az" ? "bg-accent border border-accent text-ground" : "text-white border border-white hover:text-ink"
+                }`}
+            >
+              Az
+            </button>
+          </div>
+        )}
 
         <button
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-full text-white lg:hidden cursor-pointer"
-        >
-          <div className="relative flex h-4 w-5 flex-col justify-between items-center">
-            {/* Top Line */}
-            <span
-              className={`h-[1.5px] w-5 bg-white rounded-full transition-none ${open ? "translate-y-1.75 rotate-45" : ""}`}
-            />
-            {/* Middle Line */}
-            <span
-              className={`h-[1.5px] w-5 bg-white rounded-full transition-none ${open ? "opacity-0 scale-x-0" : ""}`}
-            />
-            {/* Bottom Line */}
-            <span
-              className={`h-[1.5px] w-5 bg-white rounded-full transition-none ${open ? "-translate-y-1.75 -rotate-45" : ""}`}
-            />
-          </div>
-        </button>
+          className={`menu-icon-btn lg:hidden ${open ? "open" : ""}`}
+        />
       </nav>
 
-      {open && (
-        <div
-          className="border-t border-line bg-ground -mt-20 lg:hidden"
-        >
-          <ul className="flex flex-col px-6 pt-20 pb-10">
-            {nav.map((item) => {
-              const isActive = activeSection === item.href;
-              return (
-                <li key={item.href} className={`nav-effect-item my-1 ${isActive ? "active" : ""}`}>
-                  <a
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="block py-3 font-mono text-sm uppercase tracking-widest text-ink-dim"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              );
-            })}
+      {/* Mobile Morphing Liquid Blob Background */}
+      <div className={`mobile-nav-blob lg:hidden ${open ? "open" : ""}`} />
 
-            <li className="flex items-center gap-1 pt-2 font-mono text-xs uppercase tracking-widest">
-              <button
-                type="button"
-                onClick={() => setLang("en")}
-                className={`rounded-full px-3 py-1 transition-colors cursor-pointer ${lang === "en" ? "bg-accent text-ground" : "text-ink-dim hover:text-ink"
-                  }`}
-              >
-                En
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang("az")}
-                className={`rounded-full px-2.5 py-1 transition-colors cursor-pointer ${lang === "az" ? "bg-accent text-ground" : "text-ink-dim hover:text-ink"
-                  }`}
-              >
-                Az
-              </button>
-            </li>
-          </ul>
-        </div>
-      )}
+      {/* Mobile Fullscreen Menu Overlay */}
+      <div className={`mobile-nav-overlay lg:hidden ${open ? "open" : ""}`}>
+        <ul>
+          {nav.map((item) => {
+            const isActive = activeSection === item.href;
+            return (
+              <li key={item.href} className={isActive ? "active" : ""}>
+                <a
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
+
+          <li className="flex items-center justify-center gap-2 pt-6">
+            <button
+              type="button"
+              onClick={() => setLang("en")}
+              className={`rounded-full mr-2 mt-6 px-4 py-1.5 font-mono text-xs uppercase tracking-wider transition-colors cursor-pointer ${lang === "en" ? "bg-accent text-ground font-bold" : "text-ink-dim border border-white/20 hover:text-white"
+                }`}
+            >
+              En
+            </button>
+            <button
+              type="button"
+              onClick={() => setLang("az")}
+              className={`rounded-full px-4 py-1.5 font-mono text-xs uppercase tracking-wider transition-colors cursor-pointer ${lang === "az" ? "bg-accent text-ground font-bold" : "text-ink-dim border border-white/20 hover:text-white"
+                }`}
+            >
+              Az
+            </button>
+          </li>
+        </ul>
+      </div>
     </header>
   );
 }

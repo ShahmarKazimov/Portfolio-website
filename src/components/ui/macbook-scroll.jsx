@@ -140,7 +140,7 @@ export const MacbookScroll = ({
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-accent hover:underline"
                   >
-                    Verify Certificate <IconExternalLink className="h-3 w-3" />
+                    View Certificate <IconExternalLink className="h-3 w-3" />
                   </a>
                 </div>
               ) : (
@@ -153,7 +153,7 @@ export const MacbookScroll = ({
         </div>
 
         <div className="flex justify-center items-center gap-1.5 text-xs text-ink-faint font-mono pt-1">
-          <span>← Swipe horizontally to explore certificates ({flatCerts.length}) →</span>
+          <span>← Swipe horizontally to explore certificates →</span>
         </div>
       </div>
     );

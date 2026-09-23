@@ -138,11 +138,7 @@ export function CardStack({
         tabIndex={0}
         onKeyDown={onKeyDown}
       >
-        {/* Ambient spotlight glow */}
-        <div
-          className="pointer-events-none absolute inset-x-0 top-2 mx-auto h-36 w-[80%] rounded-full bg-amber-500/10 blur-3xl"
-          aria-hidden="true"
-        />
+     
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-28 w-[85%] rounded-full bg-black/50 blur-3xl"
           aria-hidden="true"
@@ -436,7 +432,7 @@ export default function Projects() {
     <section id="projects" className="mx-auto max-w-7xl border-b border-line px-6 md:px-10 py-12 sm:py-24 overflow-hidden">
       <div>
         <SectionHeading
-          eyebrow="Selected Work"
+          eyebrow="Projects"
           title="Projects built from idea to execution"
           index="00 / 05"
         />

@@ -17,7 +17,7 @@ export default function About() {
   return (
     <section ref={sectionRef} id="about" className="relative overflow-hidden border-b border-line px-6 py-12 sm:py-24 md:px-10">
       <div className="relative mx-auto max-w-7xl">
-        <SectionHeading eyebrow="Skills" title="Technical Skills • AI Expertise • Languages" index="00 / 01" />
+        <SectionHeading eyebrow="Skills" title="AI expertise, development skills, and languages." index="00 / 01" />
 
         <motion.div style={{ y: fgY }} className="grid gap-12 md:grid-cols-12 items-start">
           {/* Sol hisse: Bio + Categorized Skills List */}
@@ -81,7 +81,7 @@ export default function About() {
               </p>
 
               {/* Animated Skill Glass Bucket */}
-              <div className="rounded-3xl border border-line bg-ground-raised/30 pb-12 mb-20 sm:pb-8 pt-24 backdrop-blur-sm overflow-hidden">
+              <div className="rounded-3xl border border-line bg-ground-raised/30 pb-12 mb-12 sm:pb-8 pt-24 backdrop-blur-sm overflow-hidden">
                 <Bucket />
               </div>
             </div>

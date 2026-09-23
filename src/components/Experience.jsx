@@ -33,7 +33,7 @@ export default function Experience() {
       <div className="relative z-10 mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Experience"
-          title="A path from Finance to Development to AI."
+          title="Professional experience and continuous growth."
           index="00 / 02"
         />
 

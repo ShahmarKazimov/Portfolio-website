@@ -7,11 +7,11 @@ const totalCount = certifications.reduce((sum, group) => sum + group.items.lengt
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="relative border-b border-line px-6 py-12 sm:py-24 md:px-10">
+    <section id="certifications" className="relative border-b border-line px-6 py-12 sm:py-40 md:px-10">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Certifications"
-          title={`${totalCount} credentials across AI fluency, education, and business.`}
+          title={`Certificates in AI, education, and business.`}
           index="00 / 04"
         />
 
