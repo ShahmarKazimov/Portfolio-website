@@ -22,7 +22,7 @@ export default function Experience() {
   });
 
   return (
-    <section id="experience" className="relative min-h-screen overflow-hidden border-b border-line px-4 py-20 sm:px-6 md:px-10 md:py-24">
+    <section id="experience" className="relative min-h-screen overflow-hidden border-b border-line px-6 py-12 sm:px-6 md:px-10 md:py-24">
       {/* Background Generative Tree Animation */}
       <div className="absolute inset-0 z-0">
         <GenerativeTree speed={1} particleAmount={1.2} opacity={0.9} brightness={1.2} />
@@ -39,13 +39,13 @@ export default function Experience() {
 
         <div ref={containerRef} className="relative mt-12 md:mt-16">
           {/* Background Timeline Rail */}
-          <div className="absolute left-5 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-white/10 z-0" />
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-white/10 z-0" />
 
           {/* Animated Dynamic Scroll Timeline Line */}
           {!reduced && (
             <motion.div
               style={{ scaleY, originY: 0 }}
-              className="absolute left-5 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-linear-to-b from-amber-400 via-amber-500 to-amber-600/20 z-10 shadow-[0_0_12px_#f59e0b]"
+              className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-linear-to-b from-amber-400 via-amber-500 to-amber-600/20 z-10 shadow-[0_0_12px_#f59e0b]"
             />
           )}
 
@@ -67,7 +67,7 @@ export default function Experience() {
                       stiffness: 350,
                       damping: 22,
                     }}
-                    className="absolute left-5 md:left-1/2 top-7 md:top-8 -translate-x-1/2 -translate-y-1/2 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-ground/90 border border-amber-500/40 backdrop-blur-sm shadow-[0_0_15px_rgba(245,158,11,0.3)]"
+                    className="absolute left-0 md:left-1/2 top-7 md:top-8 -translate-x-1/2 -translate-y-1/2 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-ground/90 border border-amber-500/40 backdrop-blur-sm shadow-[0_0_15px_rgba(245,158,11,0.3)]"
                   >
                     <span className="relative flex h-3.5 w-3.5 items-center justify-center">
                       {role.current && (
@@ -85,7 +85,7 @@ export default function Experience() {
 
                   {/* Card Container with Smooth Slide & Scale Animation */}
                   <div
-                    className={`w-full pl-12 md:pl-0 ${
+                    className={`w-full pl-6 md:pl-0 ${
                       isEven
                         ? "md:w-[calc(50%-2.5rem)] md:mr-auto md:ml-0 md:text-right"
                         : "md:w-[calc(50%-2.5rem)] md:ml-auto md:mr-0 md:text-left"

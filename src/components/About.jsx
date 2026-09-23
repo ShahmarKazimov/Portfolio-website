@@ -15,7 +15,7 @@ export default function About() {
   const fgY = useTransform(scrollYProgress, [0, 1], [reduced ? 0 : -90, reduced ? 0 : 90]);
 
   return (
-    <section ref={sectionRef} id="about" className="relative overflow-hidden border-b border-line px-6 py-6 sm:py-24 md:px-10">
+    <section ref={sectionRef} id="about" className="relative overflow-hidden border-b border-line px-6 py-12 sm:py-24 md:px-10">
       <div className="relative mx-auto max-w-7xl">
         <SectionHeading eyebrow="Skills" title="Technical Skills • AI Expertise • Languages" index="00 / 01" />
 
@@ -81,7 +81,7 @@ export default function About() {
               </p>
 
               {/* Animated Skill Glass Bucket */}
-              <div className="rounded-3xl border border-line bg-ground-raised/30 pb-10 mb-24 sm:pb-8 pt-20 backdrop-blur-sm overflow-hidden">
+              <div className="rounded-3xl border border-line bg-ground-raised/30 pb-12 mb-20 sm:pb-8 pt-24 backdrop-blur-sm overflow-hidden">
                 <Bucket />
               </div>
             </div>

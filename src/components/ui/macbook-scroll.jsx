@@ -42,23 +42,26 @@ export const MacbookScroll = ({
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && window.innerWidth < 768) {
-      setIsMobile(true);
-    }
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   // Smooth lid open transformation during scroll
   const scaleX = useTransform(
     scrollYProgress,
     [0, 0.25],
-    [1.1, isMobile ? 1 : 1.1],
+    [1.2, 1.2],
   );
   const scaleY = useTransform(
     scrollYProgress,
     [0, 0.25],
-    [0.6, isMobile ? 1 : 1.11],
+    [0.6, 1.2],
   );
-  const translate = useTransform(scrollYProgress, [0, 0.35], [0, 120]);
+  const translate = useTransform(scrollYProgress, [0, 0.35], [0, 150]);
   const rotate = useTransform(scrollYProgress, [0.05, 0.25], [-28, 0]);
   const textTransform = useTransform(scrollYProgress, [0, 0.2], [0, 80]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
@@ -95,58 +98,62 @@ export const MacbookScroll = ({
   // Mobile Carousel View
   if (isMobile) {
     return (
-      <div className="w-full py-6 flex flex-col gap-6">
+      <div className="w-full flex flex-col gap-4">
         {title && (
-          <h2 className="text-center text-2xl font-bold text-neutral-800 dark:text-white mb-2">
+          <h2 className="text-center font-display text-2xl font-bold text-ink mb-2">
             {title}
           </h2>
         )}
 
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-2 pb-4 scrollbar-none">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-6 py-4 scrollbar-none -mx-6">
           {flatCerts.map((item, idx) => (
             <div
               key={idx}
-              className="snap-center shrink-0 w-[85vw] max-w-85 rounded-2xl bg-[#0B0B0F] border border-white/10 p-5 shadow-xl flex flex-col justify-between"
+              className="snap-center shrink-0 w-[82vw] sm:w-80 rounded-2xl bg-ground-raised border border-line p-5 shadow-xl flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
+              <div className="flex items-center justify-between border-b border-line pb-3 mb-3">
                 <div className="flex items-center gap-1.5 font-mono text-xs font-semibold text-accent">
                   <IconAward className="h-4 w-4 shrink-0" />
-                  <span className="truncate">{item.issuer}</span>
+                  <span className="truncate max-w-45">{item.issuer}</span>
+                </div>
+                <div className="rounded-full bg-accent/20 px-2.5 py-0.5 font-mono text-[10px] text-accent shrink-0">
+                  {idx + 1} / {flatCerts.length}
                 </div>
               </div>
 
               <div className="flex flex-col gap-2 my-2">
-                <h3 className="font-display text-base font-bold leading-snug text-white">
+                <h3 className="font-display text-base font-bold leading-snug text-ink">
                   {item.name}
                 </h3>
                 {item.description && (
-                  <p className="text-xs text-neutral-300 leading-relaxed line-clamp-4">
+                  <p className="text-xs text-ink-dim leading-relaxed line-clamp-4 font-body">
                     {item.description}
                   </p>
                 )}
               </div>
 
-              {item.link && (
-                <div className="flex items-center justify-between border-t border-white/10 pt-3 mt-2">
+              {item.link ? (
+                <div className="flex items-center justify-between border-t border-line pt-3 mt-3">
                   <a
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:underline"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-accent hover:underline"
                   >
                     Verify Certificate <IconExternalLink className="h-3 w-3" />
                   </a>
-                  <div className="rounded-full bg-accent/20 px-2.5 py-0.5 font-mono text-[10px] text-accent shrink-0">
-                    {idx + 1} / {flatCerts.length}
-                  </div>
+                </div>
+              ) : (
+                <div className="border-t border-line pt-3 mt-3 text-[11px] font-mono text-ink-faint">
+                  Verified Credential
                 </div>
               )}
             </div>
           ))}
         </div>
 
-        <div className="flex justify-center items-center gap-1.5 text-xs text-neutral-500 font-mono">
-          <span>← Swipe horizontally to explore certificates →</span>
+        <div className="flex justify-center items-center gap-1.5 text-xs text-ink-faint font-mono pt-1">
+          <span>← Swipe horizontally to explore certificates ({flatCerts.length}) →</span>
         </div>
       </div>
     );
@@ -251,7 +258,7 @@ export const Lid = ({
           transformStyle: "preserve-3d",
           transformOrigin: "top",
         }}
-        className="absolute inset-0 -left-4 h-96 min-w-136 rounded-2xl bg-[#010101] p-2"
+        className="absolute inset-0 h-96 w-lg rounded-2xl bg-[#010101] p-2"
       >
         <div className="absolute inset-0 rounded-lg bg-[#272729]" />
 

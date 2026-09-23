@@ -7,11 +7,33 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [lang, setLang] = useState("en");
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sectionElements = nav
+      .map((item) => item.href.replace("#", ""))
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${entry.target.id}`);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    sectionElements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -27,19 +49,20 @@ export default function Nav() {
         </div>
 
         <ul className="pointer-events-auto absolute left-1/2 top-2 hidden -translate-x-1/2 items-center gap-6 px-8 py-3 lg:flex xl:gap-10 xl:px-10">
-          {nav.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                className="whitespace-nowrap text-xs transition-colors sm:text-sm"
-                style={{ color: "white" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#E1E0CC")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "white")}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
+          {nav.map((item) => {
+            const isActive = activeSection === item.href;
+            return (
+              <li key={item.href} className={`nav-effect-item ${isActive ? "active" : ""}`}>
+                <a
+                  href={item.href}
+                  className="whitespace-nowrap text-xs transition-colors sm:text-sm inline-block"
+                  style={{ color: isActive ? "var(--color-accent)" : "white" }}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="hidden items-center gap-1 font-mono text-xs uppercase tracking-widest lg:absolute lg:top-2 py-3 lg:right-0 lg:flex">
@@ -90,17 +113,20 @@ export default function Nav() {
           className="border-t border-line bg-ground -mt-20 lg:hidden"
         >
           <ul className="flex flex-col px-6 pt-20 pb-10">
-            {nav.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-3 font-mono text-sm uppercase tracking-widest text-ink-dim hover:text-accent"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
+            {nav.map((item) => {
+              const isActive = activeSection === item.href;
+              return (
+                <li key={item.href} className={`nav-effect-item my-1 ${isActive ? "active" : ""}`}>
+                  <a
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="block py-3 font-mono text-sm uppercase tracking-widest text-ink-dim"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
 
             <li className="flex items-center gap-1 pt-2 font-mono text-xs uppercase tracking-widest">
               <button
@@ -126,3 +152,4 @@ export default function Nav() {
     </header>
   );
 }
+

@@ -232,3 +232,111 @@ body {
 .card-float-1 { animation-delay: 0.6s; }
 .card-float-2 { animation-delay: 1.2s; }
 .card-float-3 { animation-delay: 1.8s; }
+
+/* Nav item line effect */
+.nav-effect-item {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 6px;
+  transition: background-position-x 0.9s linear;
+}
+
+/* Active state: Static SVG line underneath, theme accent color */
+.nav-effect-item.active {
+  background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEi idPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjM5MHB4IiBoZWlnaHQ9IjUwcHgiIHZpZXdCb3g9IjAgMCAzOTAgNTAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDM5MCA1MCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iJUIzRkI5MjBDIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBkPSJNMCw0Ny41ODVjMCwwLDk3LjUsMCwxMzAsMAoJYzEzLjc1LDAsMjguNzQtMzguNzNzOCw0Ni4xNjgtMTkuNDE2QzE5Mi42NjksNDYuNSwyNDMuNjAzLDQ3LjU4NSwyNjAsNDcuNTg1YzMxLjgyMSwwLDEzMCwwLDEzMCwwIi8+Cjwvc3ZnPg==");
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  background-size: 195px 25px;
+}
+
+/* Hover state: Animated line */
+.nav-effect-item:hover {
+  background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEi idPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjM5MHB4IiBoZWlnaHQ9IjUwcHgiIHZpZXdCb3g9IjAgMCAzOTAgNTAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDM5MCA1MCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iJUIzRkI5MjBDIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBkPSJNMCw0Ny41ODVjMCwwLDk3LjUsMCwxMzAsMAoJYzEzLjc1LDAsMjguNzQtMzguNzNzOCw0Ni4xNjgtMTkuNDE2QzE5Mi42NjksNDYuNSwyNDMuNjAzLDQ3LjU4NSwyNjAsNDcuNTg1YzMxLjgyMSwwLDEzMCwwLDEzMCwwIi8+Cjwvc3ZnPg==");
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  background-size: 195px 25px;
+  animation: line-anim 1s linear infinite;
+}
+
+.nav-effect-item.active a,
+.nav-effect-item:hover a {
+  color: var(--color-accent) !important;
+}
+
+@keyframes line-anim {
+  0% {
+    background-position-x: 390px;
+  }
+  100% {
+    background-position-x: 0px;
+  }
+}
+
+/* Contact Social Icon Reveal Effect */
+.contact-social-list {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.social-icon-item {
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+}
+
+.social-icon-item a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.25rem;
+  color: #222226;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social-icon-item a::before {
+  content: attr(data-icon);
+  font-family: "Font Awesome 6 Brands", "Font Awesome 5 Brands", "FontAwesome", sans-serif;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1em;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.45s ease-in-out;
+  line-height: 1;
+}
+
+/* Specific icon fill styling */
+.social-icon-item.instagram a::before {
+  background-image: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border-bottom: 2px solid #dc2743;
+}
+
+.social-icon-item.whatsapp a::before {
+  color: #25D366;
+  border-bottom: 2px solid #25D366;
+}
+
+.social-icon-item.linkedin a::before {
+  color: #0A66C2;
+  border-bottom: 2px solid #0A66C2;
+}
+
+.social-icon-item.github a::before {
+  color: #FFFFFF;
+  border-bottom: 2px solid #FFFFFF;
+}
+
+.social-icon-item.email a::before {
+  color: var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+.social-icon-item:hover a::before {
+  height: 100%;
+}

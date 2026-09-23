@@ -433,7 +433,7 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" className="mx-auto max-w-7xl border-b border-line px-4 sm:px-6 md:px-10 py-16 sm:py-24 overflow-hidden">
+    <section id="projects" className="mx-auto max-w-7xl border-b border-line px-6 md:px-10 py-12 sm:py-24 overflow-hidden">
       <div>
         <SectionHeading
           eyebrow="Selected Work"
