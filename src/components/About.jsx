@@ -1,13 +1,17 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import SectionHeading from "./SectionHeading";
-import { skills, languages } from "../data/content";
 import useReducedMotion from "../hooks/useReducedMotion";
 import Bucket from "./ui/bucket";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function About() {
   const sectionRef = useRef(null);
   const reduced = useReducedMotion();
+  const { content } = useLanguage();
+  const { sections, skills, languages } = content;
+  const aboutText = sections.about;
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
@@ -17,7 +21,7 @@ export default function About() {
   return (
     <section ref={sectionRef} id="about" className="relative overflow-hidden border-b border-line px-6 py-12 sm:py-24 md:px-10">
       <div className="relative mx-auto max-w-7xl">
-        <SectionHeading eyebrow="Skills" title="AI expertise, development skills, and languages." index="00 / 01" />
+        <SectionHeading eyebrow={aboutText.eyebrow} title={aboutText.title} index={aboutText.index} />
 
         <motion.div style={{ y: fgY }} className="grid gap-12 md:grid-cols-12 items-start">
           {/* Sol hisse: Bio + Categorized Skills List */}
@@ -30,7 +34,7 @@ export default function About() {
           >
             <div>
               <p className="mb-4 font-mono text-xs uppercase tracking-widest text-ink-faint">
-                Skills & Technologies
+                {aboutText.skillsTitle}
               </p>
               <div className="flex max-h-full flex-col gap-2 overflow-y-auto pr-2 custom-scrollbar">
                 {skills.map((group) => (
@@ -54,7 +58,7 @@ export default function About() {
             </div>
             <div className="block md:hidden border-t border-b border-line py-6">
               <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-faint">
-                Languages
+                {aboutText.languagesTitle}
               </p>
               <ul className="flex flex-col gap-2">
                 {languages.map((l) => (
@@ -77,7 +81,7 @@ export default function About() {
           >
             <div>
               <p className="mb-4 font-mono text-xs uppercase tracking-widest text-ink-faint">
-                Skills in Action
+                {aboutText.skillsAction}
               </p>
 
               {/* Animated Skill Glass Bucket */}
@@ -88,7 +92,7 @@ export default function About() {
 
             <div className="hidden md:block border-t border-b border-line py-6">
               <p className="mb-3 font-mono text-xs uppercase tracking-widest text-ink-faint">
-                Languages
+                {aboutText.languagesTitle}
               </p>
               <ul className="flex flex-col gap-2">
                 {languages.map((l) => (

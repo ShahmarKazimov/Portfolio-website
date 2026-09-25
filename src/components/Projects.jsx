@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { SquareArrowOutUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import SectionHeading from "./SectionHeading";
-import { projects as rawProjects } from "../data/content";
+import { useLanguage } from "../context/LanguageContext";
 
 import woodImg from "../assets/wood_in_vision.jpg";
 import eclipseImg from "../assets/eclipse.jpg";
@@ -138,7 +138,7 @@ export function CardStack({
         tabIndex={0}
         onKeyDown={onKeyDown}
       >
-     
+
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-28 w-[85%] rounded-full bg-black/50 blur-3xl"
           aria-hidden="true"
@@ -170,22 +170,22 @@ export function CardStack({
 
               const dragProps = isActive
                 ? {
-                    drag: "x",
-                    dragConstraints: { left: 0, right: 0 },
-                    dragElastic: 0.18,
-                    onDragEnd: (
-                      _e,
-                      info
-                    ) => {
-                      if (reduceMotion) return;
-                      const travel = info.offset.x;
-                      const v = info.velocity.x;
-                      const threshold = Math.min(140, cardWidth * 0.2);
+                  drag: "x",
+                  dragConstraints: { left: 0, right: 0 },
+                  dragElastic: 0.18,
+                  onDragEnd: (
+                    _e,
+                    info
+                  ) => {
+                    if (reduceMotion) return;
+                    const travel = info.offset.x;
+                    const v = info.velocity.x;
+                    const threshold = Math.min(140, cardWidth * 0.2);
 
-                      if (travel > threshold || v > 650) prev();
-                      else if (travel < -threshold || v < -650) next();
-                    },
-                  }
+                    if (travel > threshold || v > 650) prev();
+                    else if (travel < -threshold || v < -650) next();
+                  },
+                }
                 : {};
 
               return (
@@ -208,13 +208,13 @@ export function CardStack({
                     reduceMotion
                       ? false
                       : {
-                          opacity: 0,
-                          y: y + 30,
-                          x,
-                          rotateZ,
-                          rotateX,
-                          scale,
-                        }
+                        opacity: 0,
+                        y: y + 30,
+                        x,
+                        rotateZ,
+                        rotateX,
+                        scale,
+                      }
                   }
                   animate={{
                     opacity: 1,
@@ -414,6 +414,10 @@ export default function Projects() {
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
+  const { content } = useLanguage();
+  const { sections, projects: rawProjects } = content;
+  const projText = sections.projects;
+
   const items = useMemo(() => {
     return rawProjects.map((p, i) => ({
       id: p.name,
@@ -424,17 +428,17 @@ export default function Projects() {
       stack: p.stack,
       imageSrc: projectImages[i % projectImages.length],
       href: p.link,
-      ctaLabel: p.linkLabel || "View project",
+      ctaLabel: p.linkLabel || projText.viewProject,
     }));
-  }, []);
+  }, [rawProjects, projText]);
 
   return (
     <section id="projects" className="mx-auto max-w-7xl border-b border-line px-6 md:px-10 py-12 sm:py-24 overflow-hidden">
       <div>
         <SectionHeading
-          eyebrow="Projects"
-          title="Projects built from idea to execution"
-          index="00 / 05"
+          eyebrow={projText.eyebrow}
+          title={projText.title}
+          index={projText.index}
         />
 
         <div className="mt-6">

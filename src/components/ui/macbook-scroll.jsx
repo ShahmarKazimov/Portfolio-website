@@ -171,7 +171,7 @@ export const MacbookScroll = ({
               translateY: textTransform,
               opacity: textOpacity,
             }}
-            className="mb-8 text-center text-3xl font-bold text-neutral-800 dark:text-white"
+            className="mb-8 text-center text-3xl font-bold text-ink"
           >
             {title}
           </motion.h2>
@@ -190,7 +190,7 @@ export const MacbookScroll = ({
         />
 
         {/* Base area */}
-        <div className="relative -z-10 h-88 w-lg overflow-hidden rounded-2xl bg-gray-200 dark:bg-[#272729]">
+        <div className="relative -z-10 h-88 w-lg overflow-hidden rounded-2xl bg-[#272729]">
           {/* above keyboard bar */}
           <div className="relative h-10 w-full">
             <div className="absolute inset-x-0 mx-auto h-4 w-[80%] bg-[#050505]" />
@@ -209,7 +209,7 @@ export const MacbookScroll = ({
           <Trackpad />
           <div className="absolute inset-x-0 bottom-0 mx-auto h-2 w-20 rounded-tl-3xl rounded-tr-3xl bg-linear-to-t from-[#272729] to-[#050505]" />
           {showGradient && (
-            <div className="absolute inset-x-0 bottom-0 z-50 h-40 w-full bg-linear-to-t from-white via-white to-transparent dark:from-black dark:via-black"></div>
+            <div className="absolute inset-x-0 bottom-0 z-50 h-40 w-full bg-linear-to-t from-ground via-ground to-transparent"></div>
           )}
           {badge && <div className="absolute bottom-4 left-4">{badge}</div>}
         </div>

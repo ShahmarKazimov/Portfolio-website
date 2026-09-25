@@ -1,13 +1,16 @@
 import { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import SectionHeading from "./SectionHeading";
-import { experience } from "../data/content";
 import GenerativeTree from "./ui/GenerativeTree";
 import useReducedMotion from "../hooks/useReducedMotion";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Experience() {
   const containerRef = useRef(null);
   const reduced = useReducedMotion();
+  const { content } = useLanguage();
+  const { sections, experience } = content;
+  const expText = sections.experience;
 
   // Scroll progress for the timeline line height animation
   const { scrollYProgress } = useScroll({
@@ -32,14 +35,14 @@ export default function Experience() {
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <SectionHeading
-          eyebrow="Experience"
-          title="Professional experience and continuous growth."
-          index="00 / 02"
+          eyebrow={expText.eyebrow}
+          title={expText.title}
+          index={expText.index}
         />
 
         <div ref={containerRef} className="relative mt-12 md:mt-16">
           {/* Background Timeline Rail */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-white/10 z-0" />
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-line z-0" />
 
           {/* Animated Dynamic Scroll Timeline Line */}
           {!reduced && (
@@ -67,38 +70,36 @@ export default function Experience() {
                       stiffness: 350,
                       damping: 22,
                     }}
-                    className="absolute left-0 md:left-1/2 top-7 md:top-8 -translate-x-1/2 -translate-y-1/2 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-ground/90 border border-amber-500/40 backdrop-blur-sm shadow-[0_0_15px_rgba(245,158,11,0.3)]"
+                    className="absolute left-0 md:left-1/2 top-7 md:top-8 -translate-x-1/2 -translate-y-1/2 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-ground-raised border border-accent/40 backdrop-blur-sm shadow-md"
                   >
                     <span className="relative flex h-3.5 w-3.5 items-center justify-center">
                       {role.current && (
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
                       )}
                       <span
-                        className={`relative inline-flex rounded-full h-3 w-3 ${
-                          role.current
+                        className={`relative inline-flex rounded-full h-3 w-3 ${role.current
                             ? "bg-accent shadow-[0_0_12px_#f59e0b]"
-                            : "bg-amber-500/80"
-                        }`}
+                            : "bg-accent/80"
+                          }`}
                       />
                     </span>
                   </motion.div>
 
                   {/* Card Container with Smooth Slide & Scale Animation */}
                   <div
-                    className={`w-full pl-6 md:pl-0 ${
-                      isEven
+                    className={`w-full pl-6 md:pl-0 ${isEven
                         ? "md:w-[calc(50%-2.5rem)] md:mr-auto md:ml-0 md:text-right"
                         : "md:w-[calc(50%-2.5rem)] md:ml-auto md:mr-0 md:text-left"
-                    }`}
+                      }`}
                   >
                     <motion.div
                       initial={
                         reduced
                           ? { opacity: 1 }
                           : {
-                              opacity: 0,
-                              y: 15,
-                            }
+                            opacity: 0,
+                            y: 15,
+                          }
                       }
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.15 }}
@@ -107,28 +108,27 @@ export default function Experience() {
                         ease: "easeOut",
                       }}
                       whileHover={reduced ? {} : { y: -4, transition: { duration: 0.2 } }}
-                      className="group relative rounded-2xl border border-white/15 bg-ground/85 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-amber-500/60 hover:bg-ground/95 hover:shadow-[0_0_35px_rgba(245,158,11,0.22)]"
+                      className="group relative rounded-2xl border border-line bg-ground-raised/90 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-accent hover:shadow-xl"
                     >
                       {/* Ambient card accent glow on hover */}
                       <div className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-linear-to-r from-amber-500/10 via-transparent to-amber-500/5" />
 
                       <div
-                        className={`relative z-10 flex flex-wrap items-center gap-3 mb-2 ${
-                          isEven ? "md:justify-end" : "md:justify-start"
-                        }`}
+                        className={`relative z-10 flex flex-wrap items-center gap-3 mb-2 ${isEven ? "md:justify-end" : "md:justify-start"
+                          }`}
                       >
                         <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
                           {role.period}
                         </span>
                         {role.current && (
-                          <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/50 bg-accent/10 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-amber-300">
+                          <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/50 bg-accent/10 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-accent font-semibold">
                             <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-                            Current
+                            {expText.currentBadge}
                           </span>
                         )}
                       </div>
 
-                      <h3 className="relative z-10 font-display text-xl font-medium text-ink group-hover:text-amber-100 transition-colors">
+                      <h3 className="relative z-10 font-display text-xl font-medium text-ink group-hover:text-accent transition-colors">
                         {role.role}
                       </h3>
 

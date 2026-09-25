@@ -1,12 +1,16 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import { profile } from "../data/content";
 import FancyTextHover from "./ui/FancyTextHover";
 import { InteractiveTravelCard } from "./ui/InteractiveTravelCard";
 import profilePictureUrl from "../assets/profile-picture.png";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Contact() {
+  const { content } = useLanguage();
+  const { sections, profile } = content;
+  const contactText = sections.contact;
+
   const formRef = useRef(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -76,7 +80,7 @@ export default function Contact() {
           viewport={{ once: true, margin: "-80px" }}
           className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-accent"
         >
-          Contact
+          {contactText.eyebrow}
         </motion.p>
 
         <motion.h2
@@ -86,7 +90,7 @@ export default function Contact() {
           transition={{ duration: 0.7 }}
           className="max-w-3xl font-display text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-5xl"
         >
-          Let’s make ideas real.
+          {contactText.title}
         </motion.h2>
 
         <motion.div
@@ -99,13 +103,13 @@ export default function Contact() {
           {/* Left Column: Profile Card, Social Icons, Location */}
           <div className="flex flex-col gap-6 lg:col-span-5 w-full">
             <InteractiveTravelCard
-              title="Shahmar Kazimov"
+              title={profile.name}
               imageUrl={profilePictureUrl}
               className="w-full max-w-full sm:w-full h-96 sm:h-96 md:h-115"
             />
 
             <div className="flex flex-col gap-4">
-              <span className="font-mono text-xs uppercase tracking-widest text-ink-faint">Connect with me</span>
+              <span className="font-mono text-xs uppercase tracking-widest text-ink-faint">{contactText.subtitle}</span>
               <FancyTextHover className="gap-5" />
 
               <div className="flex items-center gap-2 font-mono text-xs text-ink-faint pt-1">
@@ -119,10 +123,10 @@ export default function Contact() {
           <div className="flex flex-col gap-6 rounded-2xl border border-line bg-ground-raised/60 p-6 sm:p-8 backdrop-blur-md lg:col-span-7">
             <div>
               <h3 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
-                Let's Work Together
+                {contactText.heading}
               </h3>
               <p className="mt-2 text-sm text-ink-dim font-body">
-                Have a project or idea in mind? Let's talk.
+                {contactText.desc}
               </p>
             </div>
 
@@ -138,15 +142,15 @@ export default function Contact() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="my-6 rounded-xl border border-accent/30 bg-accent/10 p-6 text-center"
               >
-                <p className="font-display text-lg font-medium text-accent">Thank you for reaching out!</p>
-                <p className="mt-1 text-xs text-ink-dim">Your message has been sent successfully. I will respond as soon as possible.</p>
+                <p className="font-display text-lg font-medium text-accent">{contactText.successTitle}</p>
+                <p className="mt-1 text-xs text-ink-dim">{contactText.successDesc}</p>
               </motion.div>
             ) : (
               <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div className="flex flex-col gap-1.5">
                     <label htmlFor="name" className="font-mono text-xs text-ink-dim">
-                      Name
+                      {contactText.nameLabel}
                     </label>
                     <input
                       type="text"
@@ -154,15 +158,15 @@ export default function Contact() {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Your name"
+                      placeholder={contactText.namePlaceholder}
                       required
-                      className="rounded-lg border border-line bg-ground px-4 py-2.5 text-sm placeholder:text-ink-faint/40 outline-none transition focus:ring-1 focus:ring-accent"
+                      className="rounded-lg border border-line bg-ground px-4 py-2.5 text-sm placeholder:text-ink-faint outline-none transition focus:ring-1 focus:ring-accent"
                     />
                   </div>
 
                   <div className="flex flex-col gap-1.5">
                     <label htmlFor="email" className="font-mono text-xs text-ink-dim">
-                      Email
+                      {contactText.emailLabel}
                     </label>
                     <input
                       type="email"
@@ -170,16 +174,16 @@ export default function Contact() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="your.email@example.com"
+                      placeholder={contactText.emailPlaceholder}
                       required
-                      className="rounded-lg border border-line bg-ground px-4 py-2.5 text-sm placeholder:text-ink-faint/40 outline-none transition focus:ring-1 focus:ring-accent"
+                      className="rounded-lg border border-line bg-ground px-4 py-2.5 text-sm placeholder:text-ink-faint outline-none transition focus:ring-1 focus:ring-accent"
                     />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="subject" className="font-mono text-xs text-ink-dim">
-                    Subject
+                    {contactText.subjectLabel}
                   </label>
                   <input
                     type="text"
@@ -187,14 +191,14 @@ export default function Contact() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="Project Inquiry / Collaboration"
-                    className="rounded-lg border border-line bg-ground px-4 py-2.5 text-sm placeholder:text-ink-faint/40 outline-none transition focus:ring-1 focus:ring-accent"
+                    placeholder={contactText.subjectPlaceholder}
+                    className="rounded-lg border border-line bg-ground px-4 py-2.5 text-sm placeholder:text-ink-faint outline-none transition focus:ring-1 focus:ring-accent"
                   />
                 </div>
 
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="message" className="font-mono text-xs text-ink-dim">
-                    Message
+                    {contactText.messageLabel}
                   </label>
                   <textarea
                     id="message"
@@ -202,9 +206,9 @@ export default function Contact() {
                     rows={4}
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Tell me about your project or idea..."
+                    placeholder={contactText.messagePlaceholder}
                     required
-                    className="resize-none rounded-lg border border-line bg-ground px-4 py-2.5 text-sm placeholder:text-ink-faint/40 outline-none transition focus:ring-1 focus:ring-accent"
+                    className="resize-none rounded-lg border border-line bg-ground px-4 py-2.5 text-sm placeholder:text-ink-faint outline-none transition focus:ring-1 focus:ring-accent"
                   />
                 </div>
 
@@ -213,7 +217,7 @@ export default function Contact() {
                   disabled={loading}
                   className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-ground transition hover:bg-accent/90 active:scale-[0.98] cursor-pointer disabled:opacity-50"
                 >
-                  <span>{loading ? "Sending..." : "Send Message"}</span>
+                  <span>{loading ? contactText.sendingBtn : contactText.sendBtn}</span>
                   <span className="text-base">→</span>
                 </button>
               </form>
@@ -221,8 +225,7 @@ export default function Contact() {
 
             {/* Form Footer */}
             <div className="mt-2 flex flex-col gap-1 border-t border-line/60 pt-4 font-mono text-xs text-ink-faint">
-              <span className="font-semibold text-ink-dim">Baku, Azerbaijan</span>
-              <span>Available for AI, software & freelance projects</span>
+              <span className="font-semibold text-ink-dim">{profile.location}</span>
             </div>
           </div>
         </motion.div>

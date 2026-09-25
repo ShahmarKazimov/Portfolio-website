@@ -9,26 +9,30 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import CursorGlow from "./components/ui/CursorGlow";
 import Preloader from "./components/ui/Preloader";
+import { LanguageProvider } from "./context/LanguageContext";
 
 export default function App() {
   return (
-    <div className="relative min-h-screen bg-black text-ink">
-      <Preloader />
-      <div className="noise" />
-      <CursorGlow />
-      <div className="relative z-10">
-        <Nav />
-        <main>
-          <PrismaHero />
-          <About />
-          <Experience />
-          <Education />
-          <Certifications />
-          <Projects />
-          <Contact />
-        </main>
-        <Footer />
+    <LanguageProvider>
+      <div className="relative min-h-screen bg-ground text-ink">
+        <Preloader />
+        <div className="noise" />
+        <CursorGlow />
+        <div className="relative z-10">
+          <Nav />
+          <main>
+            <PrismaHero />
+            <About />
+            <Experience />
+            <Education />
+            <Certifications />
+            <Projects />
+            <Contact />
+          </main>
+          <Footer />
+        </div>
       </div>
-    </div>
+    </LanguageProvider>
   );
 }
+

@@ -1,14 +1,19 @@
 import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
-import { education } from "../data/content";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Education() {
+  const { content } = useLanguage();
+  const { sections, education } = content;
+  const eduText = sections.education;
+
   return (
     <section id="education" className="border-b relative border-line px-6 py-12 sm:py-24 md:px-10">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
-          eyebrow="Education"
-          title="Education and specialized training."
+          eyebrow={eduText.eyebrow}
+          title={eduText.title}
+          index={eduText.index}
         />
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -19,7 +24,7 @@ export default function Education() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="relative flex flex-col justify-between rounded-xl border border-line bg-surface-card/40 p-6 backdrop-blur-sm transition-colors hover:border-accent/40"
+              className="relative flex flex-col justify-between rounded-xl border border-line bg-ground-raised/40 p-6 backdrop-blur-sm transition-colors hover:border-accent/40"
             >
               <div>
                 <span className="font-mono text-xs text-accent font-semibold">{ed.period}</span>

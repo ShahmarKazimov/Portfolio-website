@@ -2,8 +2,8 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
 import video2 from "../../assets/4.mp4";
-import { profile } from "../../data/content";
 import { DominoButton } from "./DominoButton";
+import { useLanguage } from "../../context/LanguageContext";
 
 /* ---------------- WordsPullUp ---------------- */
 export const WordsPullUp = ({ text, className = "", showAsterisk = false, style }) => {
@@ -68,6 +68,9 @@ export const WordsPullUpMultiStyle = ({ segments, className = "", style }) => {
 /* ---------------- Hero ---------------- */
 
 export const PrismaHero = () => {
+  const { content } = useLanguage();
+  const { profile } = content;
+
   return (
     <section className="min-h-svh w-full lg:h-screen">
       <div className="relative min-h-svh w-full lg:h-full lg:min-h-0">
@@ -86,8 +89,7 @@ export const PrismaHero = () => {
         <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay" />
 
         {/* Gradient overlay */}
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-black/60" />
-
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/40 via-black/20 to-black/70" />
 
         {/* Hero content */}
         <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 lg:top-auto lg:translate-y-0 lg:bottom-0 mx-auto max-w-7xl px-4 sm:px-6 pb-0 lg:pb-8">
@@ -110,10 +112,10 @@ export const PrismaHero = () => {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="text-xs text-primary/70 sm:text-sm md:text-base max-w-md lg:max-w-none text-center lg:text-left"
-                style={{ lineHeight: 1.3 }}
+                className="text-xs text-ink-dim sm:text-sm md:text-base max-w-md lg:max-w-none text-center lg:text-left drop-shadow-sm"
+                style={{ lineHeight: 1.4 }}
               >
-                AI Instructor and Software Developer with 3+ years of software development experience. Skilled in React and Next.js, with practical experience in Generative AI, prompt engineering, and AI tools. Experienced in delivering practical AI training and applying AI to real-world use cases.
+                {profile.heroBio}
               </motion.p>
 
               <motion.div
@@ -127,7 +129,7 @@ export const PrismaHero = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Download CV
+                  {profile.downloadCv}
                   <ArrowRight className="h-4 w-4" />
                 </DominoButton>
               </motion.div>
