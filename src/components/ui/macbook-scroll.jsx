@@ -59,9 +59,9 @@ export const MacbookScroll = ({
   const scaleY = useTransform(
     scrollYProgress,
     [0, 0.25],
-    [0.6, 1.2],
+    [0.6, 1.1],
   );
-  const translate = useTransform(scrollYProgress, [0, 0.35], [0, 150]);
+  const translate = useTransform(scrollYProgress, [0, 0.35], [0, 130]);
   const rotate = useTransform(scrollYProgress, [0.05, 0.25], [-28, 0]);
   const textTransform = useTransform(scrollYProgress, [0, 0.2], [0, 80]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
@@ -162,9 +162,9 @@ export const MacbookScroll = ({
   return (
     <div
       ref={ref}
-      className="relative flex min-h-[300vh]  flex-col items-center justify-start py-0 pt-4 perspective-midrange"
+      className="relative flex min-h-[300vh] flex-col items-center justify-start py-0 perspective-midrange"
     >
-      <div className="sticky top-30 flex flex-col items-center justify-center">
+      <div className="sticky top-[15.9%] flex flex-col items-center justify-center">
         {title && (
           <motion.h2
             style={{
