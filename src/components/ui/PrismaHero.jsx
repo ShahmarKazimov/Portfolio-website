@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState, useLayoutEffect } from "react";
 import video2 from "../../assets/4.mp4";
 import { DominoButton } from "./DominoButton";
 import { useLanguage } from "../../context/LanguageContext";
@@ -70,9 +70,42 @@ export const WordsPullUpMultiStyle = ({ segments, className = "", style }) => {
 export const PrismaHero = () => {
   const { content } = useLanguage();
   const { profile } = content;
+  const heroRef = useRef(null);
+  const introRef = useRef(null);
+  const line1Ref = useRef(null);
+  const line2Ref = useRef(null);
+  const isInView = useInView(heroRef, { once: true });
+
+  const [introWidth, setIntroWidth] = useState(0);
+  const [line1Width, setLine1Width] = useState(0);
+  const [line2Width, setLine2Width] = useState(0);
+
+  useLayoutEffect(() => {
+    const updateWidths = () => {
+      if (introRef.current) {
+        introRef.current.style.width = "auto";
+        setIntroWidth(Math.ceil(introRef.current.getBoundingClientRect().width) + 48);
+        introRef.current.style.width = "";
+      }
+      if (line1Ref.current) {
+        line1Ref.current.style.width = "auto";
+        setLine1Width(Math.ceil(line1Ref.current.getBoundingClientRect().width) + 48);
+        line1Ref.current.style.width = "";
+      }
+      if (line2Ref.current) {
+        line2Ref.current.style.width = "auto";
+        setLine2Width(Math.ceil(line2Ref.current.getBoundingClientRect().width) + 48);
+        line2Ref.current.style.width = "";
+      }
+    };
+
+    updateWidths();
+    window.addEventListener("resize", updateWidths);
+    return () => window.removeEventListener("resize", updateWidths);
+  }, []);
 
   return (
-    <section className="min-h-svh w-full lg:h-screen">
+    <section ref={heroRef} className="min-h-svh w-full lg:h-screen">
       <div className="relative min-h-svh w-full lg:h-full lg:min-h-0">
         {/* Background video */}
         <video
@@ -92,18 +125,33 @@ export const PrismaHero = () => {
         <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/40 via-black/20 to-black/70" />
 
         {/* Hero content */}
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 lg:top-auto lg:translate-y-0 lg:bottom-0 mx-auto max-w-7xl px-4 sm:px-6 pb-0 lg:pb-8">
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 lg:top-auto lg:translate-y-0 lg:bottom-0 mx-auto max-w-7xl px-6 sm:px-0 pb-0 lg:pb-8">
           <div className="grid grid-cols-12 items-center lg:items-end gap-6 lg:gap-4 text-center lg:text-left">
             <div className="col-span-12 lg:col-span-8 flex flex-col items-center lg:items-start">
-              <h1
-                className="font-medium leading-[0.8] tracking-[-0.04em] text-[14vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[7vw]"
-                style={{ color: "#E1E0CC" }}
-              >
-                <WordsPullUp text="Shahmar " showAsterisk />
-                <WordsPullUp
-                  className="text-accent ml-0 lg:ml-16 xl:ml-50 text-[13vw] sm:text-[13vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[6vw]"
-                  text="Kazimov"
-                />
+              <div className="mb-2">
+                <span
+                  ref={introRef}
+                  className={`hero-intro ${isInView ? "animate-in" : ""}`}
+                  style={introWidth ? { "--w": `${introWidth}px` } : undefined}
+                >
+                  Hi, my name is
+                </span>
+              </div>
+              <h1 className="leading-[0.85] tracking-[-0.04em] text-[14vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[7vw] flex flex-col items-center lg:items-start">
+                <span
+                  ref={line1Ref}
+                  className={`hero-name-line line-1 ${isInView ? "animate-in" : ""}`}
+                  style={line1Width ? { "--w": `${line1Width}px` } : undefined}
+                >
+                  Shahmar
+                </span>
+                <span
+                  ref={line2Ref}
+                  className={`hero-name-line line-2 text-[13vw] sm:text-[13vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[6vw] ml-0 lg:ml-16 xl:ml-36 text-accent ${isInView ? "animate-in" : ""}`}
+                  style={line2Width ? { "--w": `${line2Width}px` } : undefined}
+                >
+                  Kazimov
+                </span>
               </h1>
             </div>
 
@@ -111,7 +159,7 @@ export const PrismaHero = () => {
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, delay: 3.5, ease: [0.16, 1, 0.3, 1] }}
                 className="text-xs text-ink-dim sm:text-sm md:text-base max-w-md lg:max-w-none text-center lg:text-left drop-shadow-sm"
                 style={{ lineHeight: 1.4 }}
               >
@@ -121,7 +169,7 @@ export const PrismaHero = () => {
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, delay: 3.8, ease: [0.16, 1, 0.3, 1] }}
                 className="self-center lg:self-start"
               >
                 <DominoButton

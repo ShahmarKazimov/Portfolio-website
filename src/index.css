@@ -709,3 +709,152 @@ body {
   border-right: 4px solid white;
   animation: typing 2s steps(20) forwards, blink 0.7s infinite;
 }
+
+:root {
+  --hero-start: 4.5s;
+  --hero-d1: 1.2s;
+  --hero-d2: 0.9s;
+  --hero-d3: 0.9s;
+
+  --hero-t1: var(--hero-start);
+  --hero-t2: calc(var(--hero-t1) + var(--hero-d1));
+  --hero-t3: calc(var(--hero-t2) + var(--hero-d2));
+  --hero-t-end: calc(var(--hero-t3) + var(--hero-d3));
+}
+
+/* Hero Intro & Name Sequential Animations */
+.hero-intro {
+  color: var(--color-accent);
+  font-family: 'Fira Code', monospace;
+  font-weight: 800;
+  font-size: clamp(14px, 3.5vw, 24px);
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  width: 0;
+  opacity: 0;
+  border-right: 1px solid transparent;
+  box-sizing: border-box;
+}
+
+.hero-intro.animate-in {
+  animation:
+    hero-type-intro var(--hero-d1) steps(14, end) var(--hero-t1) forwards,
+    hero-cursor-intro var(--hero-d1) steps(1, end) var(--hero-t1) forwards;
+}
+
+.hero-name-line {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  opacity: 0;
+  /* font-family: 'Fira Code', monospace; */
+  font-weight: 800;
+  border-right: 1px solid transparent;
+  box-sizing: border-box;
+}
+
+.hero-name-line.line-1 {
+  color: #E1E0CC;
+}
+
+.hero-name-line.line-1.animate-in {
+  animation:
+    hero-type-line1 var(--hero-d2) steps(7, end) var(--hero-t2) forwards,
+    hero-cursor-line1 var(--hero-d2) steps(1, end) var(--hero-t2) forwards;
+}
+
+.hero-name-line.line-2.animate-in {
+  animation:
+    hero-type-line2 var(--hero-d3) steps(7, end) var(--hero-t3) forwards,
+    hero-cursor-line2 var(--hero-d3) steps(1, end) var(--hero-t3) forwards;
+}
+
+@keyframes hero-type-intro {
+  0% {
+    width: 0;
+    opacity: 1;
+  }
+
+  100% {
+    width: var(--w, 14ch);
+    opacity: 1;
+  }
+}
+
+@keyframes hero-type-line1 {
+  0% {
+    width: 0;
+    opacity: 1;
+  }
+
+  100% {
+    width: var(--w);
+    opacity: 1;
+  }
+}
+
+@keyframes hero-type-line2 {
+  0% {
+    width: 0;
+    opacity: 1;
+  }
+
+  100% {
+    width: var(--w);
+    opacity: 1;
+  }
+}
+
+@keyframes hero-cursor-intro {
+
+  0%,
+  99% {
+    border-right-color: orange;
+  }
+
+  100% {
+    border-right-color: transparent;
+  }
+}
+
+@keyframes hero-cursor-line1 {
+
+  0%,
+  99% {
+    border-right-color: orange;
+  }
+
+  100% {
+    border-right-color: transparent;
+  }
+}
+
+@keyframes hero-cursor-line2 {
+
+  0%,
+  99% {
+    border-right-color: orange;
+  }
+
+  100% {
+    border-right-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-intro {
+    width: auto !important;
+    opacity: 1 !important;
+    border-right: none !important;
+    animation: none !important;
+  }
+
+  .hero-name-line {
+    width: auto !important;
+    opacity: 1 !important;
+    border-right: none !important;
+    animation: none !important;
+  }
+}
