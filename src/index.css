@@ -749,7 +749,7 @@ body {
   overflow: hidden;
   width: 0;
   opacity: 0;
-  /* font-family: 'Fira Code', monospace; */
+  font-family: 'Fira Code', monospace;
   font-weight: 800;
   border-right: 1px solid transparent;
   box-sizing: border-box;

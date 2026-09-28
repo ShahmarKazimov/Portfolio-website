@@ -54,9 +54,9 @@ export default function Nav() {
       }`}
     >
       <nav className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-2 sm:px-6 lg:px-0 lg:py-8">
-        <div className="py-3 lg:rounded-b-2xl lg:rounded-t-none lg:absolute lg:top-2">
+        <div className="py-3 lg:rounded-b-2xl lg:rounded-t-none lg:absolute">
           <a href="/" className="font-display text-sm">
-            <img src={logoMain} alt="Logo" className="h-6 w-7" />
+            <img src={logoMain} alt="Logo" className="h-8 w-9" />
           </a>
         </div>
 
@@ -77,7 +77,7 @@ export default function Nav() {
           })}
         </ul>
 
-        <div className="flex items-center gap-3 lg:absolute lg:top-2 py-3 lg:right-0">
+        <div className="flex items-center gap-3 lg:absolute py-3 lg:right-0">
           {!open && (
             <div className="hidden lg:flex items-center gap-1 font-mono text-xs uppercase tracking-widest">
               <button
@@ -136,7 +136,7 @@ export default function Nav() {
             <button
               type="button"
               onClick={() => setLang("en")}
-              className={`rounded-full px-5 py-2 font-mono text-xs uppercase tracking-wider transition-colors cursor-pointer ${
+              className={`rounded-full px-5 py-2 mt-4 mr-4 font-mono text-xs uppercase tracking-wider transition-colors cursor-pointer ${
                 lang === "en"
                   ? "bg-accent text-ground font-bold shadow-sm"
                   : "text-ink-dim border border-line hover:text-ink"

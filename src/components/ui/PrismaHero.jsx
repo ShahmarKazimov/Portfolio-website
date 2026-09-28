@@ -102,7 +102,7 @@ export const PrismaHero = () => {
     updateWidths();
     window.addEventListener("resize", updateWidths);
     return () => window.removeEventListener("resize", updateWidths);
-  }, []);
+  }, [profile.heroIntro, profile.firstName, profile.lastName]);
 
   return (
     <section ref={heroRef} className="min-h-svh w-full lg:h-screen">
@@ -134,23 +134,23 @@ export const PrismaHero = () => {
                   className={`hero-intro ${isInView ? "animate-in" : ""}`}
                   style={introWidth ? { "--w": `${introWidth}px` } : undefined}
                 >
-                  Hi, my name is
+                  {profile.heroIntro || "Hi, my name is"}
                 </span>
               </div>
-              <h1 className="leading-[0.85] tracking-[-0.04em] text-[14vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[7vw] flex flex-col items-center lg:items-start">
+              <h1 className="leading-[0.95] tracking-[-0.04em] text-[14vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[7vw] flex flex-col items-center lg:items-start">
                 <span
                   ref={line1Ref}
                   className={`hero-name-line line-1 ${isInView ? "animate-in" : ""}`}
                   style={line1Width ? { "--w": `${line1Width}px` } : undefined}
                 >
-                  Shahmar
+                  {profile.firstName || "Shahmar"}
                 </span>
                 <span
                   ref={line2Ref}
                   className={`hero-name-line line-2 text-[13vw] sm:text-[13vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[6vw] ml-0 lg:ml-16 xl:ml-36 text-accent ${isInView ? "animate-in" : ""}`}
                   style={line2Width ? { "--w": `${line2Width}px` } : undefined}
                 >
-                  Kazimov
+                  {profile.lastName || "Kazimov"}
                 </span>
               </h1>
             </div>
@@ -159,7 +159,7 @@ export const PrismaHero = () => {
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 3.5, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, delay: 4.6, ease: [0.16, 1, 0.3, 1] }}
                 className="text-xs text-ink-dim sm:text-sm md:text-base max-w-md lg:max-w-none text-center lg:text-left drop-shadow-sm"
                 style={{ lineHeight: 1.4 }}
               >
@@ -169,7 +169,7 @@ export const PrismaHero = () => {
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 3.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, delay: 4.8, ease: [0.16, 1, 0.3, 1] }}
                 className="self-center lg:self-start"
               >
                 <DominoButton
