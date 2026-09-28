@@ -138,7 +138,7 @@ export const PrismaHero = () => {
                   {profile.heroIntro || "Hi, my name is"}
                 </span>
               </div>
-              <h1 className="leading-[0.95] tracking-[-0.04em] text-[12vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[7vw] flex flex-col items-center lg:items-start max-w-full overflow-hidden">
+              <h1 className="leading-[1.1] sm:leading-[0.9] tracking-[-0.04em] text-[12vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[7vw] flex flex-col items-center lg:items-start max-w-full overflow-hidden">
                 <span
                   ref={line1Ref}
                   className={`hero-name-line line-1 ${isInView ? "animate-in" : ""}`}
