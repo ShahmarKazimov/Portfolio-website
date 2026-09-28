@@ -75,30 +75,30 @@ export default function Contact() {
 
       <div className="relative mx-auto max-w-7xl">
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-20px" }}
-          transition={{ duration: 0.35 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-accent"
         >
           {contactText.eyebrow}
         </motion.p>
 
         <motion.h2
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-20px" }}
-          transition={{ duration: 0.45 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl font-display text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-5xl"
         >
           {contactText.title}
         </motion.h2>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-20px" }}
-          transition={{ duration: 0.45, delay: 0.05 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.45, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
           className="mt-12 grid grid-cols-1 gap-10 border-t border-line pt-10 lg:grid-cols-12 lg:items-start"
         >
           {/* Left Column: Profile Card, Social Icons, Location */}

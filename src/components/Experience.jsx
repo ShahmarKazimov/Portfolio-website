@@ -98,14 +98,14 @@ export default function Experience() {
                           ? { opacity: 1 }
                           : {
                             opacity: 0,
-                            y: 15,
+                            y: 12,
                           }
                       }
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.1 }}
                       transition={{
-                        duration: 0.3,
-                        ease: "easeOut",
+                        duration: 0.38,
+                        ease: [0.22, 1, 0.36, 1],
                       }}
                       whileHover={reduced ? {} : { y: -4, transition: { duration: 0.2 } }}
                       className="group relative rounded-2xl border border-line bg-ground-raised/90 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-accent hover:shadow-xl"

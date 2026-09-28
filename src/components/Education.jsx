@@ -20,10 +20,10 @@ export default function Education() {
           {education.map((ed, i) => (
             <motion.div
               key={ed.program + ed.period}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-20px" }}
-              transition={{ duration: 0.35, delay: i * 0.05 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.4, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
               className="relative flex flex-col justify-between rounded-xl border border-line bg-ground-raised/40 p-6 backdrop-blur-sm transition-colors hover:border-accent/40"
             >
               <div>

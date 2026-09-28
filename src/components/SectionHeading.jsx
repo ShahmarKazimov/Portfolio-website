@@ -5,19 +5,19 @@ export default function SectionHeading({ eyebrow, title, index }) {
     <div className="mb-12 sm:mb-24 flex items-end justify-between gap-6 border-b border-line pb-6">
       <div>
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-20px" }}
-          transition={{ duration: 0.35 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent"
         >
           {eyebrow}
         </motion.p>
         <motion.h2
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-20px" }}
-          transition={{ duration: 0.4, delay: 0.03 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.45, delay: 0.03, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-4xl font-medium tracking-tight text-ink sm:text-5xl"
         >
           {title}
