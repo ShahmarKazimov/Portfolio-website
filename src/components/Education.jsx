@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 import { useLanguage } from "../context/LanguageContext";
+import { EASE_OUT, VIEWPORT_ONCE } from "../hooks/motionConfig";
 
 export default function Education() {
   const { content } = useLanguage();
@@ -22,8 +23,8 @@ export default function Education() {
               key={ed.program + ed.period}
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.4, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+              viewport={VIEWPORT_ONCE}
+              transition={{ duration: 0.35, delay: i * 0.05, ease: EASE_OUT }}
               className="relative flex flex-col justify-between rounded-xl border border-line bg-ground-raised/40 p-6 backdrop-blur-sm transition-colors hover:border-accent/40"
             >
               <div>

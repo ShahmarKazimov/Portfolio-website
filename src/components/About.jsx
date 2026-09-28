@@ -4,6 +4,7 @@ import SectionHeading from "./SectionHeading";
 import useReducedMotion from "../hooks/useReducedMotion";
 import Bucket from "./ui/bucket";
 import { useLanguage } from "../context/LanguageContext";
+import { EASE_OUT, VIEWPORT_ONCE } from "../hooks/motionConfig";
 
 export default function About() {
   const sectionRef = useRef(null);
@@ -28,8 +29,8 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            viewport={VIEWPORT_ONCE}
+            transition={{ duration: 0.38, ease: EASE_OUT }}
             className="md:col-span-6 flex flex-col gap-6"
           >
             <div>
@@ -75,8 +76,8 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.45, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            viewport={VIEWPORT_ONCE}
+            transition={{ duration: 0.38, delay: 0.06, ease: EASE_OUT }}
             className="md:col-span-6 flex flex-col gap-6"
           >
             <div>

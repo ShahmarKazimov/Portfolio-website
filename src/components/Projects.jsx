@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { SquareArrowOutUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { useLanguage } from "../context/LanguageContext";
+import { EASE_OUT, VIEWPORT_ONCE } from "../hooks/motionConfig";
 
 import woodImg from "../assets/wood_in_vision.jpg";
 import eclipseImg from "../assets/eclipse.jpg";
@@ -441,7 +442,13 @@ export default function Projects() {
           index={projText.index}
         />
 
-        <div className="mt-6">
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_ONCE}
+          transition={{ duration: 0.38, delay: 0.05, ease: EASE_OUT }}
+          className="mt-6"
+        >
           <CardStack
             items={items}
             cardWidth={responsiveConfig.width}
@@ -458,7 +465,7 @@ export default function Projects() {
             loop={true}
             showDots={true}
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -4,6 +4,7 @@ import SectionHeading from "./SectionHeading";
 import GenerativeTree from "./ui/GenerativeTree";
 import useReducedMotion from "../hooks/useReducedMotion";
 import { useLanguage } from "../context/LanguageContext";
+import { EASE_OUT, VIEWPORT_ONCE } from "../hooks/motionConfig";
 
 export default function Experience() {
   const containerRef = useRef(null);
@@ -64,7 +65,7 @@ export default function Experience() {
                   <motion.div
                     initial={reduced ? { opacity: 1 } : { scale: 0, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.1 }}
+                    viewport={VIEWPORT_ONCE}
                     transition={{
                       type: "spring",
                       stiffness: 350,
@@ -78,8 +79,8 @@ export default function Experience() {
                       )}
                       <span
                         className={`relative inline-flex rounded-full h-3 w-3 ${role.current
-                            ? "bg-accent shadow-[0_0_12px_#f59e0b]"
-                            : "bg-accent/80"
+                          ? "bg-accent shadow-[0_0_12px_#f59e0b]"
+                          : "bg-accent/80"
                           }`}
                       />
                     </span>
@@ -88,8 +89,8 @@ export default function Experience() {
                   {/* Card Container with Smooth Slide & Scale Animation */}
                   <div
                     className={`w-full pl-6 md:pl-0 ${isEven
-                        ? "md:w-[calc(50%-2.5rem)] md:mr-auto md:ml-0 md:text-right"
-                        : "md:w-[calc(50%-2.5rem)] md:ml-auto md:mr-0 md:text-left"
+                      ? "md:w-[calc(50%-2.5rem)] md:mr-auto md:ml-0 md:text-right"
+                      : "md:w-[calc(50%-2.5rem)] md:ml-auto md:mr-0 md:text-left"
                       }`}
                   >
                     <motion.div
@@ -102,10 +103,10 @@ export default function Experience() {
                           }
                       }
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.1 }}
+                      viewport={VIEWPORT_ONCE}
                       transition={{
-                        duration: 0.38,
-                        ease: [0.22, 1, 0.36, 1],
+                        duration: 0.35,
+                        ease: EASE_OUT,
                       }}
                       whileHover={reduced ? {} : { y: -4, transition: { duration: 0.2 } }}
                       className="group relative rounded-2xl border border-line bg-ground-raised/90 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-accent hover:shadow-xl"

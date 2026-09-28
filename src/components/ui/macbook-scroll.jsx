@@ -153,7 +153,7 @@ export const MacbookScroll = ({
         </div>
 
         <div className="flex justify-center items-center gap-1.5 text-xs text-ink-faint font-mono pt-1">
-          <span>← Swipe horizontally to explore certificates →</span>
+          <span>← Swipe explore certificates →</span>
         </div>
       </div>
     );
