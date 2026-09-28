@@ -138,7 +138,7 @@ export const PrismaHero = () => {
                   {profile.heroIntro || "Hi, my name is"}
                 </span>
               </div>
-              <h1 className="leading-[0.95] tracking-[-0.04em] text-[14vw] sm:text-[12vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[7vw] flex flex-col items-center lg:items-start">
+              <h1 className="leading-[0.95] tracking-[-0.04em] text-[12vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[7vw] flex flex-col items-center lg:items-start max-w-full overflow-hidden">
                 <span
                   ref={line1Ref}
                   className={`hero-name-line line-1 ${isInView ? "animate-in" : ""}`}
@@ -148,7 +148,7 @@ export const PrismaHero = () => {
                 </span>
                 <span
                   ref={line2Ref}
-                  className={`hero-name-line line-2 text-[13vw] sm:text-[13vw] md:text-[10vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[6vw] ml-0 lg:ml-16 xl:ml-36 text-accent ${isInView ? "animate-in" : ""}`}
+                  className={`hero-name-line line-2 text-[11vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[6vw] ml-0 lg:ml-16 xl:ml-36 text-accent ${isInView ? "animate-in" : ""}`}
                   style={line2Width ? { "--w": `${line2Width}px` } : undefined}
                 >
                   {profile.lastName || "Kazimov"}
