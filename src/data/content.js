@@ -61,8 +61,8 @@ export const contentData = {
       },
       contact: {
         eyebrow: "Contact",
-        title: "Let's build something exceptional together.",
-        subtitle: "Connect with me",
+        title: "Let’s make the difference.",
+        subtitle: "Connect",
         heading: "Send a message",
         desc: "Have a project in mind, an AI training request, or a collaboration proposal? Fill out the form below or email me directly.",
         nameLabel: "Name",

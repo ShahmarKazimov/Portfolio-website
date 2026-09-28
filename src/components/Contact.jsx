@@ -77,7 +77,8 @@ export default function Contact() {
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: true, margin: "-20px" }}
+          transition={{ duration: 0.35 }}
           className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-accent"
         >
           {contactText.eyebrow}
@@ -86,8 +87,8 @@ export default function Contact() {
         <motion.h2
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7 }}
+          viewport={{ once: true, margin: "-20px" }}
+          transition={{ duration: 0.45 }}
           className="max-w-3xl font-display text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-5xl"
         >
           {contactText.title}
@@ -96,8 +97,8 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+          viewport={{ once: true, margin: "-20px" }}
+          transition={{ duration: 0.45, delay: 0.05 }}
           className="mt-12 grid grid-cols-1 gap-10 border-t border-line pt-10 lg:grid-cols-12 lg:items-start"
         >
           {/* Left Column: Profile Card, Social Icons, Location */}
@@ -105,14 +106,13 @@ export default function Contact() {
             <InteractiveTravelCard
               title={profile.name}
               imageUrl={profilePictureUrl}
-              className="w-full max-w-full sm:w-full h-96 sm:h-96 md:h-115"
+              className="w-full max-w-full sm:w-full h-96 sm:h-115"
             />
 
-            <div className="flex flex-col gap-4">
-              <span className="font-mono text-xs uppercase tracking-widest text-ink-faint">{contactText.subtitle}</span>
+            <div className="flex flex-col sm:flex-row gap-4 items-start justify-between ">
               <FancyTextHover className="gap-5" />
 
-              <div className="flex items-center gap-2 font-mono text-xs text-ink-faint pt-1">
+              <div className="flex items-center gap-2 font-mono text-xs text-ink-faint">
                 <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>{profile.location}</span>
               </div>
@@ -222,11 +222,6 @@ export default function Contact() {
                 </button>
               </form>
             )}
-
-            {/* Form Footer */}
-            <div className="mt-2 flex flex-col gap-1 border-t border-line/60 pt-4 font-mono text-xs text-ink-faint">
-              <span className="font-semibold text-ink-dim">{profile.location}</span>
-            </div>
           </div>
         </motion.div>
       </div>

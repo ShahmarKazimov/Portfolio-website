@@ -28,8 +28,8 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7 }}
+            viewport={{ once: true, margin: "-20px" }}
+            transition={{ duration: 0.45 }}
             className="md:col-span-6 flex flex-col gap-6"
           >
             <div>
@@ -75,8 +75,8 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            viewport={{ once: true, margin: "-20px" }}
+            transition={{ duration: 0.45, delay: 0.05 }}
             className="md:col-span-6 flex flex-col gap-6"
           >
             <div>

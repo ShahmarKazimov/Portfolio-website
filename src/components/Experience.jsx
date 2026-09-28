@@ -64,7 +64,7 @@ export default function Experience() {
                   <motion.div
                     initial={reduced ? { opacity: 1 } : { scale: 0, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.1 }}
                     transition={{
                       type: "spring",
                       stiffness: 350,
@@ -102,9 +102,9 @@ export default function Experience() {
                           }
                       }
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.15 }}
+                      viewport={{ once: true, amount: 0.1 }}
                       transition={{
-                        duration: 0.4,
+                        duration: 0.3,
                         ease: "easeOut",
                       }}
                       whileHover={reduced ? {} : { y: -4, transition: { duration: 0.2 } }}

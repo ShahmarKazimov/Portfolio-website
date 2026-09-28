@@ -42,7 +42,7 @@ const socialLinks = [
 
 export default function FancyTextHover({ className }) {
   return (
-    <ul className={`contact-social-list flex-wrap ${className || ''}`}>
+    <ul className={`contact-social-list flex-wrap justify-between sm:justify-start ${className || ''}`}>
       {socialLinks.map((item) => (
         <li key={item.label} className={`social-icon-item ${item.typeClass}`}>
           <a

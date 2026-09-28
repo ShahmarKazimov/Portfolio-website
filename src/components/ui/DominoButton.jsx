@@ -20,7 +20,7 @@ export function DominoButton({
           align-items: center;
           justify-content: center;
           padding: 14px 32px;
-          background: black;
+          background: transparent;
           border: 1px solid gray;
           font-family: inherit;
           font-size: 15px;

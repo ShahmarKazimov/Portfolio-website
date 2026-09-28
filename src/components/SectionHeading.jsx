@@ -7,8 +7,8 @@ export default function SectionHeading({ eyebrow, title, index }) {
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
+          viewport={{ once: true, margin: "-20px" }}
+          transition={{ duration: 0.35 }}
           className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent"
         >
           {eyebrow}
@@ -16,8 +16,8 @@ export default function SectionHeading({ eyebrow, title, index }) {
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, delay: 0.05 }}
+          viewport={{ once: true, margin: "-20px" }}
+          transition={{ duration: 0.4, delay: 0.03 }}
           className="font-display text-4xl font-medium tracking-tight text-ink sm:text-5xl"
         >
           {title}

@@ -22,8 +22,8 @@ export default function Education() {
               key={ed.program + ed.period}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
+              viewport={{ once: true, margin: "-20px" }}
+              transition={{ duration: 0.35, delay: i * 0.05 }}
               className="relative flex flex-col justify-between rounded-xl border border-line bg-ground-raised/40 p-6 backdrop-blur-sm transition-colors hover:border-accent/40"
             >
               <div>

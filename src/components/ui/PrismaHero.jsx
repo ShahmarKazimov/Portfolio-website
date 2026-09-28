@@ -20,7 +20,7 @@ export const WordsPullUp = ({ text, className = "", showAsterisk = false, style 
             key={i}
             initial={{ y: 20, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.4, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
             className="inline-block relative"
             style={{ marginRight: isLast ? 0 : "0.25em" }}
           >
@@ -54,7 +54,7 @@ export const WordsPullUpMultiStyle = ({ segments, className = "", style }) => {
           key={i}
           initial={{ y: 20, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.4, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
           className={`inline-block ${w.className ?? ""}`}
           style={{ marginRight: "0.25em" }}
         >
@@ -160,7 +160,7 @@ export const PrismaHero = () => {
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 4.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.45, delay: 3.2, ease: [0.16, 1, 0.3, 1] }}
                 className="text-xs text-ink-dim sm:text-sm md:text-base max-w-md lg:max-w-none text-center lg:text-left drop-shadow-sm"
                 style={{ lineHeight: 1.4 }}
               >
@@ -170,7 +170,7 @@ export const PrismaHero = () => {
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 4.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.45, delay: 3.4, ease: [0.16, 1, 0.3, 1] }}
                 className="self-center lg:self-start"
               >
                 <DominoButton
