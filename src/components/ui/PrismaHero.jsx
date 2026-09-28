@@ -98,6 +98,7 @@ export const PrismaHero = () => {
         line2Ref.current.style.width = "";
       }
     };
+    
 
     updateWidths();
     window.addEventListener("resize", updateWidths);
