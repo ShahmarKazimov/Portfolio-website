@@ -1,4 +1,3 @@
-import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useRef, useState, useLayoutEffect } from "react";
 import video2 from "../../assets/4.mp4";
@@ -7,20 +6,15 @@ import { useLanguage } from "../../context/LanguageContext";
 
 /* ---------------- WordsPullUp ---------------- */
 export const WordsPullUp = ({ text, className = "", showAsterisk = false, style }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
   const words = text.split(" ");
 
   return (
-    <div ref={ref} className={`inline-flex flex-wrap ${className}`} style={style}>
+    <div className={`inline-flex flex-wrap ${className}`} style={style}>
       {words.map((word, i) => {
         const isLast = i === words.length - 1;
         return (
-          <motion.span
+          <span
             key={i}
-            initial={{ y: 20, opacity: 0 }}
-            animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
             className="inline-block relative"
             style={{ marginRight: isLast ? 0 : "0.25em" }}
           >
@@ -28,7 +22,7 @@ export const WordsPullUp = ({ text, className = "", showAsterisk = false, style 
             {showAsterisk && isLast && (
               <span className="absolute top-[0.3em] right-0 text-[0.31em]">*</span>
             )}
-          </motion.span>
+          </span>
         );
       })}
     </div>
@@ -37,9 +31,6 @@ export const WordsPullUp = ({ text, className = "", showAsterisk = false, style 
 
 /* ---------------- WordsPullUpMultiStyle ---------------- */
 export const WordsPullUpMultiStyle = ({ segments, className = "", style }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
   const words = [];
   segments.forEach((seg) => {
     seg.text.split(" ").forEach((w) => {
@@ -48,18 +39,15 @@ export const WordsPullUpMultiStyle = ({ segments, className = "", style }) => {
   });
 
   return (
-    <div ref={ref} className={`inline-flex flex-wrap justify-center ${className}`} style={style}>
+    <div className={`inline-flex flex-wrap justify-center ${className}`} style={style}>
       {words.map((w, i) => (
-        <motion.span
+        <span
           key={i}
-          initial={{ y: 20, opacity: 0 }}
-          animate={isInView ? { y: 0, opacity: 1 } : {}}
-          transition={{ duration: 0.4, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
           className={`inline-block ${w.className ?? ""}`}
           style={{ marginRight: "0.25em" }}
         >
           {w.word}
-        </motion.span>
+        </span>
       ))}
     </div>
   );
@@ -74,7 +62,6 @@ export const PrismaHero = () => {
   const introRef = useRef(null);
   const line1Ref = useRef(null);
   const line2Ref = useRef(null);
-  const isInView = useInView(heroRef, { once: true });
 
   const [introWidth, setIntroWidth] = useState(0);
   const [line1Width, setLine1Width] = useState(0);
@@ -132,7 +119,7 @@ export const PrismaHero = () => {
               <div className="mb-2">
                 <span
                   ref={introRef}
-                  className={`hero-intro ${isInView ? "animate-in" : ""}`}
+                  className="hero-intro animate-in"
                   style={introWidth ? { "--w": `${introWidth}px` } : undefined}
                 >
                   {profile.heroIntro || "Hi, my name is"}
@@ -141,14 +128,14 @@ export const PrismaHero = () => {
               <h1 className="leading-[1.1] sm:leading-[0.9] tracking-[-0.04em] text-[12vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[7vw] flex flex-col items-center lg:items-start max-w-full overflow-hidden">
                 <span
                   ref={line1Ref}
-                  className={`hero-name-line line-1 ${isInView ? "animate-in" : ""}`}
+                  className="hero-name-line line-1 animate-in"
                   style={line1Width ? { "--w": `${line1Width}px` } : undefined}
                 >
                   {profile.firstName || "Shahmar"}
                 </span>
                 <span
                   ref={line2Ref}
-                  className={`hero-name-line line-2 text-[11vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[6vw] ml-0 lg:ml-16 xl:ml-36 text-accent ${isInView ? "animate-in" : ""}`}
+                  className="hero-name-line line-2 text-[11vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] xl:text-[7vw] 2xl:text-[6vw] ml-0 lg:ml-16 xl:ml-36 text-accent animate-in"
                   style={line2Width ? { "--w": `${line2Width}px` } : undefined}
                 >
                   {profile.lastName || "Kazimov"}
@@ -157,20 +144,14 @@ export const PrismaHero = () => {
             </div>
 
             <div className="col-span-12 flex flex-col items-center lg:items-start gap-4 pb-1 sm:gap-5 lg:col-span-4">
-              <motion.p
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.45, delay: 3.2, ease: [0.16, 1, 0.3, 1] }}
+              <p
                 className="text-xs text-ink-dim sm:text-sm md:text-base max-w-md lg:max-w-none text-center lg:text-left drop-shadow-sm"
                 style={{ lineHeight: 1.4 }}
               >
                 {profile.heroBio}
-              </motion.p>
+              </p>
 
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.45, delay: 3.4, ease: [0.16, 1, 0.3, 1] }}
+              <div
                 className="self-center lg:self-start"
               >
                 <DominoButton
@@ -181,7 +162,7 @@ export const PrismaHero = () => {
                   {profile.downloadCv}
                   <ArrowRight className="h-4 w-4" />
                 </DominoButton>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>

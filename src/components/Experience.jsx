@@ -1,14 +1,11 @@
 import { useRef } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring } from "motion/react";
 import SectionHeading from "./SectionHeading";
 import GenerativeTree from "./ui/GenerativeTree";
-import useReducedMotion from "../hooks/useReducedMotion";
 import { useLanguage } from "../context/LanguageContext";
-import { EASE_OUT, VIEWPORT_ONCE } from "../hooks/motionConfig";
 
 export default function Experience() {
   const containerRef = useRef(null);
-  const reduced = useReducedMotion();
   const { content } = useLanguage();
   const { sections, experience } = content;
   const expText = sections.experience;
@@ -16,17 +13,17 @@ export default function Experience() {
   // Scroll progress for the timeline line height animation
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 85%", "end 80%"],
+    offset: ["start 95%", "end 80%"],
   });
 
   const scaleY = useSpring(scrollYProgress, {
-    stiffness: 200,
-    damping: 25,
+    stiffness: 300,
+    damping: 30,
     restDelta: 0.001,
   });
 
   return (
-    <section id="experience" className="relative min-h-screen overflow-hidden border-b border-line px-6 py-12 sm:px-6 md:px-10 md:py-24">
+    <section id="experience" className="relative border-b border-line px-6 py-12 sm:px-6 md:px-10 md:py-24">
       {/* Background Generative Tree Animation */}
       <div className="absolute inset-0 z-0">
         <GenerativeTree speed={1} particleAmount={1.2} opacity={0.9} brightness={1.2} />
@@ -46,12 +43,10 @@ export default function Experience() {
           <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-line z-0" />
 
           {/* Animated Dynamic Scroll Timeline Line */}
-          {!reduced && (
-            <motion.div
-              style={{ scaleY, originY: 0 }}
-              className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-linear-to-b from-amber-400 via-amber-500 to-amber-600/20 z-10 shadow-[0_0_12px_#f59e0b]"
-            />
-          )}
+          <motion.div
+            style={{ scaleY, originY: 0 }}
+            className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-linear-to-b from-amber-400 via-amber-500 to-amber-600/20 z-10 shadow-[0_0_12px_#f59e0b]"
+          />
 
           <div className="flex flex-col gap-12 md:gap-16">
             {experience.map((role, i) => {
@@ -61,16 +56,12 @@ export default function Experience() {
                   key={role.role + role.period}
                   className="relative flex flex-col md:flex-row items-center w-full"
                 >
-                  {/* Timeline Dot Node with Spring Pop Animation */}
+                  {/* Timeline Dot Node */}
                   <motion.div
-                    initial={reduced ? { opacity: 1 } : { scale: 0, opacity: 0 }}
+                    initial={{ scale: 0, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={VIEWPORT_ONCE}
-                    transition={{
-                      type: "spring",
-                      stiffness: 350,
-                      damping: 22,
-                    }}
+                    viewport={{ once: true, margin: "200px 0px 0px 0px" }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
                     className="absolute left-0 md:left-1/2 top-7 md:top-8 -translate-x-1/2 -translate-y-1/2 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-ground-raised border border-accent/40 backdrop-blur-sm shadow-md"
                   >
                     <span className="relative flex h-3.5 w-3.5 items-center justify-center">
@@ -86,7 +77,7 @@ export default function Experience() {
                     </span>
                   </motion.div>
 
-                  {/* Card Container with Smooth Slide & Scale Animation */}
+                  {/* Card Container */}
                   <div
                     className={`w-full pl-6 md:pl-0 ${isEven
                       ? "md:w-[calc(50%-2.5rem)] md:mr-auto md:ml-0 md:text-right"
@@ -94,21 +85,11 @@ export default function Experience() {
                       }`}
                   >
                     <motion.div
-                      initial={
-                        reduced
-                          ? { opacity: 1 }
-                          : {
-                            opacity: 0,
-                            y: 12,
-                          }
-                      }
+                      initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={VIEWPORT_ONCE}
-                      transition={{
-                        duration: 0.35,
-                        ease: EASE_OUT,
-                      }}
-                      whileHover={reduced ? {} : { y: -4, transition: { duration: 0.2 } }}
+                      viewport={{ once: true, margin: "200px 0px 0px 0px" }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      whileHover={{ y: -4, transition: { duration: 0.2 } }}
                       className="group relative rounded-2xl border border-line bg-ground-raised/90 p-6 md:p-8 backdrop-blur-md transition-all duration-300 hover:border-accent hover:shadow-xl"
                     >
                       {/* Ambient card accent glow on hover */}

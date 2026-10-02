@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { SquareArrowOutUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { useLanguage } from "../context/LanguageContext";
-import { EASE_OUT, VIEWPORT_ONCE } from "../hooks/motionConfig";
 
 import woodImg from "../assets/wood_in_vision.jpg";
 import eclipseImg from "../assets/eclipse.jpg";
@@ -44,8 +42,6 @@ export function CardStack({
   activeLiftPx = 20,
   activeScale = 1.0,
   inactiveScale = 0.85,
-  springStiffness = 280,
-  springDamping = 28,
   loop = true,
   autoAdvance = false,
   intervalMs = 3000,
@@ -55,7 +51,6 @@ export function CardStack({
   onChangeIndex,
   renderCard,
 }) {
-  const reduceMotion = useReducedMotion();
   const len = items.length;
 
   const [active, setActive] = useState(() => wrapIndex(initialIndex, len));
@@ -93,14 +88,14 @@ export function CardStack({
   };
 
   useEffect(() => {
-    if (!autoAdvance || reduceMotion || !len || (pauseOnHover && hovering)) return;
+    if (!autoAdvance || !len || (pauseOnHover && hovering)) return;
 
     const id = window.setInterval(() => {
       if (loop || active < len - 1) next();
     }, Math.max(700, intervalMs));
 
     return () => window.clearInterval(id);
-  }, [autoAdvance, intervalMs, hovering, pauseOnHover, reduceMotion, len, loop, active, next]);
+  }, [autoAdvance, intervalMs, hovering, pauseOnHover, len, loop, active, next]);
 
   if (!len) return null;
 
@@ -149,107 +144,60 @@ export function CardStack({
           className="absolute inset-0 flex items-end justify-center overflow-visible"
           style={{ perspective: `${perspectivePx}px` }}
         >
-          <AnimatePresence initial={false}>
-            {items.map((item, i) => {
-              const off = signedOffset(i, active, len, loop);
-              const abs = Math.abs(off);
-              const visible = abs <= maxOffset;
+          {items.map((item, i) => {
+            const off = signedOffset(i, active, len, loop);
+            const abs = Math.abs(off);
+            const visible = abs <= maxOffset;
 
-              if (!visible) return null;
+            if (!visible) return null;
 
-              const rotateZ = off * stepDeg;
-              const x = off * cardSpacing;
-              const y = abs * 6;
-              const z = -abs * depthPx;
+            const rotateZ = off * stepDeg;
+            const x = off * cardSpacing;
+            const y = abs * 6;
+            const z = -abs * depthPx;
 
-              const isActive = off === 0;
+            const isActive = off === 0;
 
-              const scale = isActive ? activeScale : inactiveScale;
-              const lift = isActive ? -activeLiftPx : 0;
-              const rotateX = isActive ? 0 : tiltXDeg;
-              const zIndex = 100 - abs;
+            const scale = isActive ? activeScale : inactiveScale;
+            const lift = isActive ? -activeLiftPx : 0;
+            const rotateX = isActive ? 0 : tiltXDeg;
+            const zIndex = 100 - abs;
 
-              const dragProps = isActive
-                ? {
-                  drag: "x",
-                  dragConstraints: { left: 0, right: 0 },
-                  dragElastic: 0.18,
-                  onDragEnd: (
-                    _e,
-                    info
-                  ) => {
-                    if (reduceMotion) return;
-                    const travel = info.offset.x;
-                    const v = info.velocity.x;
-                    const threshold = Math.min(140, cardWidth * 0.2);
-
-                    if (travel > threshold || v > 650) prev();
-                    else if (travel < -threshold || v < -650) next();
-                  },
-                }
-                : {};
-
-              return (
-                <motion.div
-                  key={item.id}
-                  className={cn(
-                    "absolute bottom-0 rounded-2xl border border-white/15 overflow-hidden shadow-2xl bg-ground/95 backdrop-blur-md transition-colors",
-                    "will-change-transform select-none touch-pan-y",
-                    isActive
-                      ? "cursor-grab border-amber-500/60 shadow-[0_0_30px_rgba(245,158,11,0.22)]"
-                      : "cursor-pointer hover:border-white/30"
-                  )}
+            return (
+              <div
+                key={item.id}
+                className={cn(
+                  "absolute bottom-0 rounded-2xl border border-white/15 overflow-hidden shadow-2xl bg-ground/95 backdrop-blur-md transition-all duration-300",
+                  "will-change-transform select-none touch-pan-y",
+                  isActive
+                    ? "cursor-grab border-amber-500/60 shadow-[0_0_30px_rgba(245,158,11,0.22)]"
+                    : "cursor-pointer hover:border-white/30"
+                )}
+                style={{
+                  width: cardWidth,
+                  height: cardHeight,
+                  zIndex,
+                  transform: `translate3d(${x}px, ${y + lift}px, ${z}px) rotateX(${rotateX}deg) rotateZ(${rotateZ}deg) scale(${scale})`,
+                  transformStyle: "preserve-3d",
+                }}
+                onClick={() => setActive(i)}
+              >
+                <div
+                  className="h-full w-full"
                   style={{
-                    width: cardWidth,
-                    height: cardHeight,
-                    zIndex,
+                    transform: `translateZ(${z}px)`,
                     transformStyle: "preserve-3d",
                   }}
-                  initial={
-                    reduceMotion
-                      ? false
-                      : {
-                        opacity: 0,
-                        y: y + 30,
-                        x,
-                        rotateZ,
-                        rotateX,
-                        scale,
-                      }
-                  }
-                  animate={{
-                    opacity: 1,
-                    x,
-                    y: y + lift,
-                    rotateZ,
-                    rotateX,
-                    scale,
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: springStiffness,
-                    damping: springDamping,
-                  }}
-                  onClick={() => setActive(i)}
-                  {...dragProps}
                 >
-                  <div
-                    className="h-full w-full"
-                    style={{
-                      transform: `translateZ(${z}px)`,
-                      transformStyle: "preserve-3d",
-                    }}
-                  >
-                    {renderCard ? (
-                      renderCard(item, { active: isActive })
-                    ) : (
-                      <DefaultFanCard item={item} active={isActive} />
-                    )}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+                  {renderCard ? (
+                    renderCard(item, { active: isActive })
+                  ) : (
+                    <DefaultFanCard item={item} active={isActive} />
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -377,9 +325,8 @@ export default function Projects() {
     const updateDimensions = () => {
       const w = window.innerWidth;
       if (w < 640) {
-        // Proportionally scaled down desktop layout for mobile
         const cardW = Math.min(w - 32, 320);
-        const cardH = Math.round(cardW * (330 / 520)); // Exact same desktop aspect ratio scaled down!
+        const cardH = Math.round(cardW * (330 / 520));
         setResponsiveConfig({
           width: cardW,
           height: cardH,
@@ -388,7 +335,6 @@ export default function Projects() {
           maxVisible: 5,
         });
       } else if (w < 1024) {
-        // Tablet layout
         const cardW = 440;
         const cardH = Math.round(cardW * (330 / 520));
         setResponsiveConfig({
@@ -399,7 +345,6 @@ export default function Projects() {
           maxVisible: 5,
         });
       } else {
-        // Desktop layout
         setResponsiveConfig({
           width: 520,
           height: 330,
@@ -442,13 +387,7 @@ export default function Projects() {
           index={projText.index}
         />
 
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VIEWPORT_ONCE}
-          transition={{ duration: 0.38, delay: 0.05, ease: EASE_OUT }}
-          className="mt-6"
-        >
+        <div className="mt-6">
           <CardStack
             items={items}
             cardWidth={responsiveConfig.width}
@@ -465,7 +404,7 @@ export default function Projects() {
             loop={true}
             showDots={true}
           />
-        </motion.div>
+        </div>
       </div>
     </section>
   );

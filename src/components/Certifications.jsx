@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 import { MacbookScroll } from "./ui/macbook-scroll";
 import { useLanguage } from "../context/LanguageContext";

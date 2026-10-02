@@ -1,11 +1,10 @@
 import { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import emailjs from "@emailjs/browser";
 import FancyTextHover from "./ui/FancyTextHover";
 import { InteractiveTravelCard } from "./ui/InteractiveTravelCard";
 import profilePictureUrl from "../assets/profile-picture.png";
 import { useLanguage } from "../context/LanguageContext";
-import { EASE_OUT, VIEWPORT_ONCE } from "../hooks/motionConfig";
 
 export default function Contact() {
   const { content } = useLanguage();
@@ -76,30 +75,30 @@ export default function Contact() {
 
       <div className="relative mx-auto max-w-7xl">
         <motion.p
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={VIEWPORT_ONCE}
-          transition={{ duration: 0.35, ease: EASE_OUT }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-accent"
         >
           {contactText.eyebrow}
         </motion.p>
 
         <motion.h2
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={VIEWPORT_ONCE}
-          transition={{ duration: 0.38, delay: 0.04, ease: EASE_OUT }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55, delay: 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="max-w-3xl font-display text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-5xl"
         >
           {contactText.title}
         </motion.h2>
 
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={VIEWPORT_ONCE}
-          transition={{ duration: 0.38, delay: 0.06, ease: EASE_OUT }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6, delay: 0.12, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="mt-12 grid grid-cols-1 gap-10 border-t border-line pt-10 lg:grid-cols-12 lg:items-start"
         >
           {/* Left Column: Profile Card, Social Icons, Location */}
@@ -138,14 +137,10 @@ export default function Contact() {
             )}
 
             {submitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="my-6 rounded-xl border border-accent/30 bg-accent/10 p-6 text-center"
-              >
+              <div className="my-6 rounded-xl border border-accent/30 bg-accent/10 p-6 text-center">
                 <p className="font-display text-lg font-medium text-accent">{contactText.successTitle}</p>
                 <p className="mt-1 text-xs text-ink-dim">{contactText.successDesc}</p>
-              </motion.div>
+              </div>
             ) : (
               <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

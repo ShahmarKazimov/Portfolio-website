@@ -1,36 +1,25 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "motion/react";
 import SectionHeading from "./SectionHeading";
-import useReducedMotion from "../hooks/useReducedMotion";
 import Bucket from "./ui/bucket";
 import { useLanguage } from "../context/LanguageContext";
-import { EASE_OUT, VIEWPORT_ONCE } from "../hooks/motionConfig";
 
 export default function About() {
-  const sectionRef = useRef(null);
-  const reduced = useReducedMotion();
   const { content } = useLanguage();
   const { sections, skills, languages } = content;
   const aboutText = sections.about;
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const fgY = useTransform(scrollYProgress, [0, 1], [reduced ? 0 : -90, reduced ? 0 : 90]);
-
   return (
-    <section ref={sectionRef} id="about" className="relative overflow-hidden border-b border-line px-6 py-12 sm:py-24 md:px-10">
+    <section id="about" className="relative overflow-hidden border-b border-line px-6 py-12 sm:py-24 md:px-10">
       <div className="relative mx-auto max-w-7xl">
         <SectionHeading eyebrow={aboutText.eyebrow} title={aboutText.title} index={aboutText.index} />
 
-        <motion.div style={{ y: fgY }} className="grid gap-12 md:grid-cols-12 items-start">
+        <div className="grid gap-12 md:grid-cols-12 items-start">
           {/* Sol hisse: Bio + Categorized Skills List */}
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={VIEWPORT_ONCE}
-            transition={{ duration: 0.38, ease: EASE_OUT }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
             className="md:col-span-6 flex flex-col gap-6"
           >
             <div>
@@ -74,10 +63,10 @@ export default function About() {
 
           {/* Sağ hisse: Animated Skill Glass Bucket + Languages */}
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={VIEWPORT_ONCE}
-            transition={{ duration: 0.38, delay: 0.06, ease: EASE_OUT }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.12, ease: [0.21, 0.47, 0.32, 0.98] }}
             className="md:col-span-6 flex flex-col gap-6"
           >
             <div>
@@ -105,7 +94,7 @@ export default function About() {
               </ul>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
