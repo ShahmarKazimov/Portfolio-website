@@ -9,6 +9,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import CursorGlow from "./components/ui/CursorGlow";
 import Preloader from "./components/ui/Preloader";
+import { SmoothCursor } from "./components/ui/smooth-cursor";
 import { LanguageProvider } from "./context/LanguageContext";
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
       <div className="relative min-h-screen bg-ground text-ink">
         <Preloader />
         <div className="noise" />
+        <SmoothCursor />
         <CursorGlow />
         <div className="relative z-10">
           <Nav />
